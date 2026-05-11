@@ -82,7 +82,7 @@ export default function About({ paragraphs = [], cards = [] }: AboutProps) {
               </p>
               <div className="gold-divider mb-4" />
               <p className="text-white/60 text-sm italic leading-relaxed text-center">
-                « Et cramponnez-vous tous ensemble à la corde d'Allah, et ne vous divisez pas. »
+                « Et cramponnez-vous tous ensemble à la corde d&apos;Allah, et ne vous divisez pas. »
               </p>
             </div>
           </div>
