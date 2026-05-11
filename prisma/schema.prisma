@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  name     String
+  role     String @default("ADMIN")
+}
+
+model Content {
+  id        String   @id @default(uuid())
+  section   String
+  title     String?
+  body      String
+  imageUrl  String?
+  order     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SocialLink {
+  id       String  @id @default(uuid())
+  platform String
+  url      String
+  label    String  @default("")
+  active   Boolean @default(true)
+  order    Int     @default(0)
+}
+
+model Activity {
+  id        String          @id @default(uuid())
+  icon      String          @default("mosque")
+  title     String
+  desc      String
+  schedule  String          @default("")
+  tag       String          @default("")
+  colorKey  String          @default("green")
+  order     Int             @default(0)
+  active    Boolean         @default(true)
+  updatedAt DateTime        @updatedAt
+  photos    ActivityPhoto[]
+}
+
+model ActivityPhoto {
+  id         String   @id @default(uuid())
+  activityId String
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  url        String
+  caption    String?
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model SiteMode {
+  id                String   @id @default("singleton")
+  mode              String   @default("normal")
+  invocationsActive Boolean  @default(true)
+  address           String   @default("Montmagny, Québec\nG5V 1J9, Canada")
+  email             String   @default("info@ccimontmagny.ca")
+  updatedAt         DateTime @updatedAt
+}
+
+model Announcement {
+  id        String              @id @default(uuid())
+  title     String
+  body      String
+  active    Boolean             @default(true)
+  order     Int                 @default(0)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  photos    AnnouncementPhoto[]
+}
+
+model AnnouncementPhoto {
+  id             String       @id @default(uuid())
+  announcementId String
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  url            String
+  caption        String?
+  order          Int          @default(0)
+  createdAt      DateTime     @default(now())
+}
+
+model Invocation {
+  id       String  @id @default(uuid())
+  category String  @default("daily")
+  label    String
+  arabic   String
+  french   String
+  side     String  @default("left")
+  active   Boolean @default(true)
+  order    Int     @default(0)
+}

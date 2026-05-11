@@ -1,0 +1,178 @@
+/* ═══════════════════════════════════════════
+   UTILITY CLASSES — Glass, Buttons, Gradients
+   ═══════════════════════════════════════════ */
+
+/* ── Glass Card ── */
+.glass-card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+/* ── Gold Divider ── */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--theme-border-gold), transparent);
+}
+
+/* ── Primary Button ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-dark) 100%);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--theme-btn-shadow);
+  filter: brightness(1.1);
+}
+
+/* ── Secondary Button ── */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--theme-gold-light);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--theme-border-gold);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+/* ── Gold Text Gradient ── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--theme-gold) 0%, var(--theme-gold-light) 45%, var(--theme-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section Backgrounds ── */
+.section-alt {
+  background-color: var(--theme-section-alt);
+}
+
+/* ── Hero Background Gradient ── */
+.hero-gradient {
+  background: linear-gradient(145deg, var(--theme-hero-from) 0%, #042A2B 25%, var(--theme-hero-mid) 55%, var(--theme-hero-to) 80%, var(--theme-hero-from) 100%);
+}
+
+/* ── Radial Glow ── */
+.radial-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, color-mix(in srgb, var(--theme-primary) 20%, transparent) 0%, transparent 70%);
+}
+
+/* ── Pattern Overlay ── */
+.pattern-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* ── Footer Background ── */
+.footer-premium {
+  background: linear-gradient(180deg, var(--theme-hero-from) 0%, #020D0E 100%);
+  position: relative;
+}
+
+/* ── Animation pulse doux permanent ── */
+@keyframes pulseSoft {
+  0%, 100% { 
+    box-shadow: 0 8px 32px rgba(13,115,119,0.08), 0 2px 8px rgba(13,115,119,0.04);
+    transform: translateY(0);
+  }
+  50% { 
+    box-shadow: 0 12px 40px rgba(13,115,119,0.12), 0 4px 12px rgba(13,115,119,0.08);
+    transform: translateY(-2px);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 3s ease-in-out infinite;
+}
+/* ── Border Glow (survol subtil) ── */
+.border-glow {
+  transition: all 0.4s ease;
+  border: 1.5px solid transparent;
+}
+.border-glow:hover {
+  border-color: var(--theme-primary-light);
+  box-shadow: 0 0 0 4px rgba(13, 115, 119, 0.08), 0 8px 32px rgba(13, 115, 119, 0.12);
+}
+
+/* ═══════════════════════════════════════════
+   EFFET LUMIÈRE SUBTIL SUR TITRE HERO
+   SANS CADRE — juste le texte
+   ═══════════════════════════════════════════ */
+
+/* Lumière blanche douce qui pulse sur le titre principal */
+.hero-title-glow {
+  text-shadow: 
+    0 0 20px rgba(255,255,255,0.1),
+    0 0 40px rgba(255,255,255,0.05);
+  animation: heroGlow 4s ease-in-out infinite;
+}
+
+/* Lumière dorée qui pulse sur le sous-titre */
+.hero-title-glow-gold {
+  text-shadow: 
+    0 0 20px rgba(197,160,89,0.15),
+    0 0 40px rgba(197,160,89,0.08);
+  animation: heroGlowGold 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+@keyframes heroGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 20px rgba(255,255,255,0.1),
+      0 0 40px rgba(255,255,255,0.05);
+  }
+  50% {
+    text-shadow: 
+      0 0 30px rgba(255,255,255,0.2),
+      0 0 60px rgba(255,255,255,0.1),
+      0 0 90px rgba(255,255,255,0.05);
+  }
+}
+
+@keyframes heroGlowGold {
+  0%, 100% {
+    text-shadow: 
+      0 0 20px rgba(197,160,89,0.15),
+      0 0 40px rgba(197,160,89,0.08);
+  }
+  50% {
+    text-shadow: 
+      0 0 30px rgba(197,160,89,0.25),
+      0 0 60px rgba(197,160,89,0.15),
+      0 0 90px rgba(197,160,89,0.08);
+  }
+}

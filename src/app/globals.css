@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import "../styles/theme.css";
+@import "../styles/animations.css";
+@import "../styles/utilities.css";
+@import "../styles/patterns.css";
+
+@theme {
+  --color-islamic-green:       var(--theme-primary);
+  --color-islamic-green-dark:  var(--theme-primary-dark);
+  --color-islamic-green-light: var(--theme-primary-light);
+  --color-gold:                var(--theme-gold);
+  --color-gold-light:          var(--theme-gold-light);
+  --color-gold-dark:           var(--theme-gold-dark);
+  --color-cream:               var(--theme-cream);
+  --color-anthracite:          var(--theme-anthracite);
+  --font-sans:   var(--font-inter, "Inter", system-ui, sans-serif);
+  --font-arabic: var(--font-noto-arabic, "Noto Sans Arabic", "Amiri", serif);
+}
+
+body {
+  background-color: var(--theme-bg-body);
+  color: var(--theme-anthracite);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--theme-primary);
+  color: white;
+}

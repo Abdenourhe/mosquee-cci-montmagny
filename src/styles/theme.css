@@ -1,0 +1,76 @@
+/* ═══════════════════════════════════════════
+   THEME VARIABLES — 4 modes : default, Ramadan, Eid-Fitr, Eid-Adha
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* ── Default (standard) ── */
+  --theme-primary:       #0D7377;
+  --theme-primary-dark:  #095457;
+  --theme-primary-light: #14A0A5;
+  --theme-gold:          #C5A059;
+  --theme-gold-light:    #D4B577;
+  --theme-gold-dark:     #A8893E;
+  --theme-cream:         #F5F5F0;
+  --theme-anthracite:    #1A1A1A;
+  --theme-hero-from:     #031F20;
+  --theme-hero-mid:      #064446;
+  --theme-hero-to:       #0D7377;
+  --theme-hero-accent:   #095457;
+  --theme-btn-shadow:    rgba(13,115,119,0.5);
+  --theme-pattern:       #C5A059;
+  --theme-bg-body:       #F8F6F1;
+  --theme-section-alt:   #F0EDE6;
+  --theme-text-muted:    rgba(255,255,255,0.45);
+  --theme-border-gold:   rgba(197,160,89,0.3);
+}
+
+/* ── Mode Ramadan ── */
+html.mode-ramadan {
+  --theme-primary:       #0F6B47;
+  --theme-primary-dark:  #09472F;
+  --theme-primary-light: #16A06A;
+  --theme-gold:          #D4A843;
+  --theme-gold-light:    #E8C070;
+  --theme-hero-from:     #040D1A;
+  --theme-hero-mid:      #082840;
+  --theme-hero-to:       #0F6B47;
+  --theme-hero-accent:   #09472F;
+  --theme-btn-shadow:    rgba(15,107,71,0.5);
+  --theme-pattern:       #D4A843;
+  --theme-bg-body:       #F0F7F4;
+  --theme-section-alt:   #E8F5EE;
+}
+
+/* ── Mode Aïd el-Fitr ── */
+html.mode-eid-fitr {
+  --theme-primary:       #B45309;
+  --theme-primary-dark:  #92400E;
+  --theme-primary-light: #D97706;
+  --theme-gold:          #FBD38D;
+  --theme-gold-light:    #FDE68A;
+  --theme-hero-from:     #3B1506;
+  --theme-hero-mid:      #78350F;
+  --theme-hero-to:       #B45309;
+  --theme-hero-accent:   #92400E;
+  --theme-btn-shadow:    rgba(180,83,9,0.5);
+  --theme-pattern:       #FBD38D;
+  --theme-bg-body:       #FFFBF0;
+  --theme-section-alt:   #FEF3C7;
+}
+
+/* ── Mode Aïd el-Adha ── */
+html.mode-eid-adha {
+  --theme-primary:       #7C5A14;
+  --theme-primary-dark:  #5C4010;
+  --theme-primary-light: #A87820;
+  --theme-gold:          #B45309;
+  --theme-gold-light:    #D97706;
+  --theme-hero-from:     #1C0800;
+  --theme-hero-mid:      #3B1506;
+  --theme-hero-to:       #78350F;
+  --theme-hero-accent:   #451A03;
+  --theme-btn-shadow:    rgba(124,90,20,0.5);
+  --theme-pattern:       #D97706;
+  --theme-bg-body:       #FDF5E8;
+  --theme-section-alt:   #FEF0D8;
+}
