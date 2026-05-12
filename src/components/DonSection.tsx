@@ -187,7 +187,7 @@ export default function DonSection() {
                         Plan de financement par étape
                       </span>
                     </div>
-                    <div className="divide-y" style={{ divideColor: "rgba(255,255,255,0.04)" }}>
+                    <div className="divide-y divide-white/5">
                       {data.years.map((yr, i) => {
                         const p = yr.goal > 0 ? Math.min(100, Math.round((yr.collected / yr.goal) * 100)) : 0;
                         const col = STEP_COLORS[i % STEP_COLORS.length];
