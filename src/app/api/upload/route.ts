@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
+import { put } from "@vercel/blob";
 
 export async function POST(req: Request) {
   try {
@@ -11,36 +10,29 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Aucun fichier reçu" }, { status: 400 });
     }
 
-    // Créer le dossier uploads si nécessaire
-    const uploadDir = join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
-
     const urls: string[] = [];
 
     for (const file of files) {
-      // Vérifier le type
-      if (!file.type.startsWith("image/")) {
-        continue;
+      const isImage = file.type.startsWith("image/");
+      const isPdf = file.type === "application/pdf";
+
+      if (!isImage && !isPdf) continue;
+
+      if (file.size > 20 * 1024 * 1024) {
+        return NextResponse.json({ error: `Fichier trop grand: ${file.name} (max 20 Mo)` }, { status: 400 });
       }
-      // Limite 10 Mo
-      if (file.size > 10 * 1024 * 1024) {
-        return NextResponse.json({ error: `Fichier trop grand: ${file.name} (max 10 Mo)` }, { status: 400 });
-      }
 
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
+      // Upload vers Vercel Blob
+      const blob = await put(file.name, file, {
+        access: "private", // ou "public" si tu veux des URLs publiques
+        addRandomSuffix: true, // Évite les conflits de noms
+      });
 
-      // Nom de fichier unique
-      const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
-      const safe = ["jpg", "jpeg", "png", "webp", "gif", "avif"].includes(ext) ? ext : "jpg";
-      const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${safe}`;
-
-      await writeFile(join(uploadDir, filename), buffer);
-      urls.push(`/uploads/${filename}`);
+      urls.push(blob.url);
     }
 
     if (urls.length === 0) {
-      return NextResponse.json({ error: "Aucune image valide" }, { status: 400 });
+      return NextResponse.json({ error: "Aucun fichier valide (image ou PDF)" }, { status: 400 });
     }
 
     return NextResponse.json({ urls }, { status: 201 });
