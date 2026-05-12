@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
 const INVOCATIONS = [
-  // ── Côté GAUCHE (français en vedette) ─────────────────────────────────────
   {
     label: "Basmala",
     arabic: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
@@ -93,8 +92,6 @@ const INVOCATIONS = [
     french: "Gloire à Toi ô Allah et Ta louange. J'atteste qu'il n'y a de divinité que Toi. Je Te demande pardon et me repens auprès de Toi.",
     side: "left", order: 15,
   },
-
-  // ── Côté DROIT (arabe en vedette) ─────────────────────────────────────────
   {
     label: "Ayat al-Kursi (Coran 2:255)",
     arabic: "اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ",
@@ -189,20 +186,17 @@ const INVOCATIONS = [
 
 export async function POST() {
   try {
-    // Delete existing invocations and re-seed
     await prisma.invocation.deleteMany();
-
     const created = await prisma.invocation.createMany({
       data: INVOCATIONS.map((inv) => ({ ...inv, active: true })),
     });
-
     return NextResponse.json({
       success: true,
       count: created.count,
       message: `${created.count} invocations insérées avec succès`,
     });
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error("POST /api/invocations/reset error:", error);
     return NextResponse.json({ error: "Erreur lors du seeding" }, { status: 500 });
   }
 }
@@ -211,7 +205,8 @@ export async function GET() {
   try {
     const count = await prisma.invocation.count();
     return NextResponse.json({ count });
-  } catch {
+  } catch (error) {
+    console.error("GET /api/invocations/reset error:", error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
