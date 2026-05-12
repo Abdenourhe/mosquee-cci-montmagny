@@ -1,16 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function DELETE(_req: NextRequest, context: any) {
+export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await context.params;
-    
-    const existing = await prisma.activityPhoto.findUnique({ where: { id } });
-    if (!existing) {
-      return NextResponse.json({ error: "Photo non trouvée" }, { status: 404 });
-    }
-
+    const { id } = await params;
     await prisma.activityPhoto.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch {
@@ -18,16 +11,9 @@ export async function DELETE(_req: NextRequest, context: any) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function PATCH(req: NextRequest, context: any) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await context.params;
-    
-    const existing = await prisma.activityPhoto.findUnique({ where: { id } });
-    if (!existing) {
-      return NextResponse.json({ error: "Photo non trouvée" }, { status: 404 });
-    }
-
+    const { id } = await params;
     const body = await req.json();
     const photo = await prisma.activityPhoto.update({ where: { id }, data: body });
     return NextResponse.json(photo);
