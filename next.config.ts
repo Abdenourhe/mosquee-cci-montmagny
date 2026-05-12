@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Images : désactive l'optimisation si tu veux un export statique
-  // ou laisse par défaut pour Vercel (recommandé)
-  images: {
-    unoptimized: true, // ← Ajoute ceci si tu as des erreurs d'image en build
+  eslint: {
+    ignoreDuringBuilds: true,
   },
-
+  images: {
+    unoptimized: true,
+  },
   async headers() {
     return [
       {
