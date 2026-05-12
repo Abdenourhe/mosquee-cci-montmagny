@@ -2,11 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // ← Ajoute ça
   },
   images: {
     unoptimized: true,
   },
+  
   async headers() {
     return [
       {
