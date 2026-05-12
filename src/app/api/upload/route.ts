@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
       // Upload vers Vercel Blob
       const blob = await put(file.name, file, {
-        access: "private", // ou "public" si tu veux des URLs publiques
+        access: "public", // ou "public" si tu veux des URLs publiques
         addRandomSuffix: true, // Évite les conflits de noms
       });
 
