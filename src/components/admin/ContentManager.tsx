@@ -138,7 +138,15 @@ export default function ContentManager({ session }: Props) {
 
   useEffect(() => { fetchAll(); }, [fetchAll]);
 
-  const toggle = (key: string) => setOpenSet((p) => { const n = new Set(p); n.has(key) ? n.delete(key) : n.add(key); return n; });
+  const toggle = (key: string) => setOpenSet((p) => { 
+  const n = new Set(p); 
+  if (n.has(key)) { 
+    n.delete(key); 
+  } else { 
+    n.add(key); 
+  } 
+  return n; 
+});
 
   const toggleEvent = async (evKey: string) => {
     const newVal = !evActive[evKey];
