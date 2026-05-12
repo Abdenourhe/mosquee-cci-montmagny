@@ -79,7 +79,7 @@ export default function Hero() {
             </p>
             <div className="gold-divider mb-3" />
             <p className="text-white/60 text-xs italic leading-relaxed">
-              « Par Celui qui détient mon âme ! Nul d'entre vous n'a la foi parfaite tant qu'il n'aime pas pour son frère ce qu'il aime pour lui-même. »
+              « Par Celui qui détient mon âme ! Nul d&apos;entre vous n&apos; a la foi parfaite tant qu&apos;il n&apos;aime pas pour son frère ce qu&apos;il aime pour lui-même. »
             </p>
           </GlassCard>
 

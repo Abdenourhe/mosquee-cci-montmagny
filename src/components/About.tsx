@@ -12,7 +12,7 @@ interface AboutProps {
 
 const DEFAULT_PARAGRAPHS = [
   "CCI de Montmagny (Centre Culturel Islamique) est un lieu de rassemblement pour la communauté musulmane de Montmagny et des régions avoisinantes au Québec, Canada.",
-  "Fondée pour servir la communauté, notre mosquée offre un espace de prière, d'apprentissage et de fraternité. Nous sommes engagés à promouvoir les valeurs islamiques de paix, de tolérance et de solidarité.",
+  "Fondée pour servir la communauté, notre mosquée offre un espace de prière, d&apos;apprentissage et de fraternité. Nous sommes engagés à promouvoir les valeurs islamiques de paix, de tolérance et de solidarité.",
   "Notre mission : faciliter la pratique religieuse, éduquer les nouvelles générations et tisser des liens forts avec la communauté québécoise dans le respect mutuel.",
 ];
 
@@ -20,7 +20,7 @@ const DEFAULT_CARDS = [
   { icon: "🕌", title: "Lieu de prière",       desc: "Un espace sacré ouvert 7j/7 pour les 5 prières quotidiennes et la Jumaa." },
   { icon: "📖", title: "Éducation islamique",   desc: "Cours de Coran, langue arabe et sciences islamiques pour tous les âges." },
   { icon: "🤝", title: "Fraternité",            desc: "Un espace de rencontre qui renforce les liens de la communauté de Montmagny." },
-  { icon: "❤️", title: "Action sociale",        desc: "Collectes alimentaires, aide aux familles et actions caritatives toute l'année." },
+  { icon: "❤️", title: "Action sociale",        desc: "Collectes alimentaires, aide aux familles et actions caritatives toute l&apos;année." },
 ];
 
 export default function About({ paragraphs = [], cards = [] }: AboutProps) {

@@ -86,7 +86,7 @@ export default function AnnouncementManager({ session, initialAnnouncements }: P
 
   /* ── DELETE ── */
   const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Supprimer l'annonce "${title}" ?`)) return;
+    if (!confirm(`Supprimer l&apos;annonce "${title}" ?`)) return;
     const res = await fetch(`/api/announcements/${id}`, { method: "DELETE" });
     if (res.ok) { setItems(items.filter((a) => a.id !== id)); flash("success", "Annonce supprimée"); }
     else flash("error", "Erreur lors de la suppression");
@@ -221,7 +221,7 @@ export default function AnnouncementManager({ session, initialAnnouncements }: P
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
               <h2 className="text-xl font-black text-gray-900">
-                {modal === "create" ? "➕ Nouvelle annonce" : "✏️ Modifier l'annonce"}
+                {modal === "create" ? "➕ Nouvelle annonce" : "✏️ Modifier l&apos;annonce"}
               </h2>
               <button onClick={closeModal} className="text-gray-400 hover:text-gray-700 transition-colors">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
@@ -245,7 +245,7 @@ export default function AnnouncementManager({ session, initialAnnouncements }: P
                 <textarea
                   rows={5}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:border-transparent"
-                  placeholder="Détails de l'annonce…"
+                  placeholder="Détails de l&apos;annonce…"
                   value={form.body}
                   onChange={(e) => setForm({ ...form, body: e.target.value })}
                 />
@@ -253,7 +253,7 @@ export default function AnnouncementManager({ session, initialAnnouncements }: P
               {/* Order + Active */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Ordre d'affichage</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Ordre d&apos;affichage</label>
                   <input
                     type="number" min={0}
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none"

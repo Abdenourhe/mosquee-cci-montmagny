@@ -52,13 +52,13 @@ export default function PrayerTimes() {
         
         <div className="flex-1 text-center sm:text-left">
           <div className="text-white font-black text-xl mb-1">
-            Prière du Vendredi — Salat al-Jum'ah
+            Prière du Vendredi — Salat al-Jum&apos;ah
           </div>
           <div className="text-white/60 text-sm mb-4">
             Chaque vendredi à la mosquée CCI De Montmagny
           </div>
           
-          {/* Verset complet Sourate Al-Jumu'ah 62:9 */}
+          {/* Verset complet Sourate Al-Jum&apos;ah 62:9 */}
           <div className="space-y-3">
             <p
               className="text-xl md:text-2xl leading-loose text-right"
@@ -73,15 +73,15 @@ export default function PrayerTimes() {
             </p>
             <div className="gold-divider" />
             <p className="text-white/60 text-sm italic leading-relaxed">
-              « Ô vous qui croyez ! Quand on appelle à la prière du jour du vendredi, accourez au rappel d'Allah et cessez tout commerce. Cela est meilleur pour vous, si vous saviez. »
+              « Ô vous qui croyez ! Quand on appelle à la prière du jour du vendredi, accourez au rappel d&apos;Allah et cessez tout commerce. Cela est meilleur pour vous, si vous saviez. »
             </p>
             <p className="text-white/40 text-xs">
-              — Sourate Al-Jumu'ah (62:9)
+              — Sourate Al-Jumu&apos;ah (62:9)
             </p>
           </div>
         </div>
         
-        {/* Badge Jum'ah */}
+        {/* Badge Jum&apos;ah */}
         <div className="flex flex-col items-center gap-2 flex-shrink-0">
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center
             bg-[rgba(197,160,89,0.15)] border border-[var(--theme-border-gold)]">
@@ -90,7 +90,7 @@ export default function PrayerTimes() {
             </svg>
           </div>
           <span className="text-[10px] text-white/30 uppercase tracking-widest font-semibold">
-            Jum'ah
+            Jum&apos;ah
           </span>
         </div>
       </div>

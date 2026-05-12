@@ -55,7 +55,7 @@ export default function UserManager({ session, initialUsers, currentUserId }: Pr
   };
 
   const handleDelete = async (user: AdminUser) => {
-    if (!confirm(`Supprimer l'administrateur "${user.name}" ?`)) return;
+    if (!confirm(`Supprimer l&apos;administrateur "${user.name}" ?`)) return;
     const res = await fetch(`/api/users/${user.id}`, { method: "DELETE" });
     const data = await res.json();
     if (res.ok) { setUsers(users.filter((u) => u.id !== user.id)); flash("success", "Administrateur supprimé"); }

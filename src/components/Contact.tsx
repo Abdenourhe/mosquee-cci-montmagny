@@ -245,7 +245,7 @@ export default function Contact({
             {status === "error" && (
               <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-center gap-2">
                 <span className="text-lg">❌</span>
-                Une erreur s'est produite. Veuillez réessayer ou nous contacter directement.
+                Une erreur c&apos;est produite. Veuillez réessayer ou nous contacter directement.
               </div>
             )}
           </form>
