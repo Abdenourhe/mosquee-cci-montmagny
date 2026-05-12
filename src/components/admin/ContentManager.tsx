@@ -230,7 +230,7 @@ export default function ContentManager({ session }: Props) {
                       <span className="w-9 h-9 flex items-center justify-center rounded-xl text-lg flex-shrink-0" style={{ backgroundColor: "#EBF9FA" }}>{sec.icon}</span>
                       <div className="min-w-0">
                         <p className="font-black text-gray-900 text-sm sm:text-base leading-tight">{sec.label}</p>
-                        {"hint" in sec && <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">{sec.hint}</p>}
+                        {sec.hint && <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">{sec.hint}</p>}
                       </div>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">

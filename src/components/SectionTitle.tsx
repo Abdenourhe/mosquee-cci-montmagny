@@ -26,7 +26,6 @@ export default function SectionTitle({
   className = "",
   children,
 }: SectionTitleProps) {
-  const textColor = light ? "text-white" : "text-[var(--theme-anthracite)]";
   const subColor = light ? "text-white/50" : "text-[var(--theme-primary)]/70";
 
   return (

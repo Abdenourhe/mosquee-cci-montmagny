@@ -34,7 +34,7 @@ export default function PhotoManager({ session, initialPhotos }: Props) {
   const filtered = filter === "all" ? photos : photos.filter((p) => p.activity === filter);
 
   const handleAdd = async () => {
-    if (!form.url.trim()) return flash("error", "L'URL de l'image est requise");
+    if (!form.url.trim()) return flash("error", "L&apos;URL de l&apos;image est requise");
     setSaving(true);
     const res = await fetch("/api/activity-photos", {
       method: "POST",
@@ -128,7 +128,7 @@ export default function PhotoManager({ session, initialPhotos }: Props) {
 
           {/* Note URL */}
           <div className="mb-6 p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-800 text-sm">
-            💡 <strong>Conseil :</strong> Utilisez des URLs d'images publiques (Google Drive ➜ partage public, Imgur, etc.) ou des URLs directes vers des images .jpg / .png / .webp.
+            💡 <strong>Conseil :</strong> Utilisez des URLs d&apos;images publiques (Google Drive ➜ partage public, Imgur, etc.) ou des URLs directes vers des images .jpg / .png / .webp.
           </div>
 
           {/* Filtres */}

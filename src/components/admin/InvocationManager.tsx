@@ -55,7 +55,7 @@ function Modal({ inv, catKey, onClose, onSaved }: {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
       <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl my-4">
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-          <h2 className="text-xl font-black text-gray-900">{inv ? "Modifier l'invocation" : "Nouvelle invocation"}</h2>
+          <h2 className="text-xl font-black text-gray-900">{inv ? "Modifier l&apos;invocation" : "Nouvelle invocation"}</h2>
           <button onClick={onClose} className="text-gray-300 hover:text-gray-600 text-2xl leading-none">×</button>
         </div>
         <div className="px-6 py-5 space-y-4">
@@ -68,7 +68,7 @@ function Modal({ inv, catKey, onClose, onSaved }: {
           </div>
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Étiquette</label>
-            <input type="text" value={label} onChange={(e) => setLabel(e.target.value)} placeholder="ex : Dou'â du matin" className={INPUT} />
+            <input type="text" value={label} onChange={(e) => setLabel(e.target.value)} placeholder="ex : Dou&apos;â du matin" className={INPUT} />
           </div>
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Texte arabe *</label>
@@ -130,7 +130,15 @@ export default function InvocationManager({ session }: Props) {
 
   useEffect(() => { fetchAll(); }, [fetchAll]);
 
-  const toggle = (key: string) => setOpenSet((p) => { const n = new Set(p); n.has(key) ? n.delete(key) : n.add(key); return n; });
+  const toggle = (key: string) => setOpenSet((p) => { 
+  const n = new Set(p); 
+  if (n.has(key)) { 
+    n.delete(key); 
+  } else { 
+    n.add(key); 
+  } 
+  return n; 
+  });
 
   const toggleGroup = async (catKey: string, makeActive: boolean) => {
     const group = items.filter((i) => i.category === catKey);

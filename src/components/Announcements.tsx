@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import ImageLightbox from "./ImageLightbox";
 
 interface Photo { id: string; url: string; caption?: string | null }
 interface Announcement {
@@ -55,7 +54,7 @@ function IconChevronRight({ className = "w-5 h-5" }: { className?: string }) {
   );
 }
 
-// ── Photo Slider avec Lightbox corrigé ──
+// ── Photo Slider avec Lightbox ──
 function PhotoSlider({ photos, title }: { photos: Photo[]; title: string }) {
   const [current, setCurrent] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);

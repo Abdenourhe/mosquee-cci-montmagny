@@ -157,7 +157,7 @@ export default function KhotbaManager({ session }: Props) {
       setArchives((p) => [...p, created]);
       setNewSujet(""); setNewDate(""); setNewFiles([]); setNewUrls([]); setNewUrlInput("");
       showFlash("success", "Khotba ajoutée !");
-    } catch { showFlash("error", "Erreur lors de l'ajout."); setUploading(false); }
+    } catch { showFlash("error", "Erreur lors de l&apos;ajout."); setUploading(false); }
     finally   { setAdding(false); }
   };
 
@@ -186,7 +186,7 @@ export default function KhotbaManager({ session }: Props) {
       setArchives((p) => p.map((r) => r.id === archiveRow.id ? { ...r, imageUrl } : r));
       setEditId(null); setEditFiles([]); setEditUrlInput("");
       showFlash("success", "Fichiers ajoutés !");
-    } catch { showFlash("error", "Erreur lors de l'ajout."); }
+    } catch { showFlash("error", "Erreur lors de l&apos;ajout."); }
     finally   { setUploading(false); }
   };
 
@@ -272,7 +272,7 @@ export default function KhotbaManager({ session }: Props) {
                 <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Sujet / Thème</label>
                 <div className="flex gap-2">
                   <input value={values["sujet"] ?? ""} onChange={(e) => setValues((p) => ({ ...p, sujet: e.target.value }))}
-                    placeholder="Ex: La patience dans l'adversité" className={inputCls} />
+                    placeholder="Ex: La patience dans l&apos;adversité" className={inputCls} />
                   {btnSave("sujet")}
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function KhotbaManager({ session }: Props) {
                 <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Prédicateur (Khatib) — optionnel</label>
                 <div className="flex gap-2">
                   <input value={values["khatib"] ?? ""} onChange={(e) => setValues((p) => ({ ...p, khatib: e.target.value }))}
-                    placeholder="Nom de l'imam ou du prédicateur" className={inputCls} />
+                    placeholder="Nom de l&apos;imam ou du prédicateur" className={inputCls} />
                   {btnSave("khatib")}
                 </div>
               </div>
@@ -376,7 +376,7 @@ export default function KhotbaManager({ session }: Props) {
 
               {/* ── Archive list ── */}
               {archives.length === 0 ? (
-                <div className="px-5 py-8 text-center text-gray-400 text-sm">Aucune archive pour l'instant.</div>
+                <div className="px-5 py-8 text-center text-gray-400 text-sm">Aucune archive pour l&apos;instant.</div>
               ) : (
                 <div className="divide-y divide-gray-50">
                   {archives.map((item) => {
