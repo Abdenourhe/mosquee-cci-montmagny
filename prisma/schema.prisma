@@ -101,6 +101,7 @@ model AnnouncementPhoto {
 model Invocation {
   id       String  @id @default(uuid())
   category String  @default("daily")
+  group    String  @default("general") 
   label    String
   arabic   String
   french   String
