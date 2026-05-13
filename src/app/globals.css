@@ -3,6 +3,7 @@
 @import "../styles/animations.css";
 @import "../styles/utilities.css";
 @import "../styles/patterns.css";
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap');
 
 @theme {
   --color-islamic-green:       var(--theme-primary);
