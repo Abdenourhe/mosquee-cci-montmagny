@@ -147,8 +147,10 @@ export default function InvocationManager({ session }: Props) {
     return;
   }
   
+  setLoading(true); // Bloquer l'interface pendant l'opération
+  
   try {
-    // Exécuter les PATCH en séquence pour éviter les conflits
+    // Exécuter en SÉQUENCE (pas en parallèle) pour éviter les limites Neon
     for (const inv of group) {
       const res = await fetch(`/api/invocations/${inv.id}`, {
         method: "PATCH",
@@ -161,7 +163,7 @@ export default function InvocationManager({ session }: Props) {
       }
     }
     
-    // Mettre à jour le state immédiatement
+    // Mettre à jour le state APRÈS toutes les requêtes
     setItems((prev) => prev.map((x) => 
       x.category === catKey ? { ...x, active: makeActive } : x
     ));
@@ -170,11 +172,13 @@ export default function InvocationManager({ session }: Props) {
     notify(true, (makeActive ? label + " activé." : label + " désactivé."));
   } catch (err: any) {
     console.error("toggleGroup error:", err);
-    notify(false, "Erreur lors de la mise à jour: " + (err.message || "inconnue"));
-    // Recharger les données en cas d'erreur
+    notify(false, "Erreur: " + (err.message || "inconnue"));
+    // Recharger pour synchroniser
     fetchAll();
+  } finally {
+    setLoading(false);
   }
-}; 
+};
 
   const deleteInv = async (id: string) => {
     if (!confirm("Supprimer cette invocation ?")) return;
