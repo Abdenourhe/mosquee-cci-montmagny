@@ -7,99 +7,55 @@ interface Inv {
   arabic: string; 
   french: string; 
   side: string; 
-  category: string;
 }
 
-function LiveComment({ inv, visible, isNew }: { 
-  inv: Inv; 
-  visible: boolean; 
-  isNew: boolean;
-}) {
-  const [showNew, setShowNew] = useState(isNew);
-  
-  useEffect(() => {
-    if (isNew) {
-      const t = setTimeout(() => setShowNew(false), 3000);
-      return () => clearTimeout(t);
-    }
-  }, [isNew]);
-
+function InvocationCard({ inv, visible }: { inv: Inv; visible: boolean }) {
   if (!visible) return null;
 
   return (
-    <div className="relative mb-3 animate-in slide-in-from-bottom-2 fade-in duration-500">
-      {/* Badge "Nouveau" */}
-      {showNew && (
-        <span className="absolute -top-1 -right-1 z-10 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full animate-pulse">
-          NEW
+    <div 
+      className="w-[320px] rounded-xl overflow-hidden shadow-2xl mb-4"
+      style={{
+        background: "linear-gradient(145deg, #0a1f1f, #051414)",
+        border: "1px solid rgba(197, 160, 89, 0.3)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(197,160,89,0.1)",
+      }}
+    >
+      {/* ─── HEADER ─── */}
+      <div className="px-4 py-2.5 flex items-center gap-2 border-b border-[#C5A059]/20">
+        <span className="text-lg">🤲</span>
+        <span className="text-[#FCD34D] text-xs font-bold uppercase tracking-wide">
+          {inv.label}
         </span>
-      )}
-      
-      <div 
-        className="w-[260px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-        style={{
-          background: "linear-gradient(135deg, rgba(13,115,119,0.95), rgba(6,30,30,0.98))",
-          border: "1px solid rgba(197,160,89,0.2)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        {/* Header avec icône et label */}
-        <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10">
-          <div 
-            className="w-7 h-7 rounded-full flex items-center justify-center text-sm flex-shrink-0"
-            style={{ background: "linear-gradient(135deg, #C5A059, #FCD34D)" }}
-          >
-            🤲
-          </div>
-          <span className="text-[#FCD34D] text-xs font-bold truncate">
-            {inv.label}
-          </span>
-          {inv.category !== 'daily' && (
-            <span className="ml-auto text-[9px] px-1.5 py-0.5 rounded-full bg-white/10 text-white/60">
-              {inv.category}
-            </span>
-          )}
-        </div>
+      </div>
 
-        {/* Corps */}
-        <div className="px-3 py-2.5">
-          {/* Arabe avec scroll si trop long */}
-          <p 
-            dir="rtl" 
-            className="text-[#FCD34D] text-sm leading-relaxed text-right mb-1.5 font-serif"
-            style={{
-              maxHeight: "4.5em",
-              overflow: "auto",
-              scrollbarWidth: "none",
-            }}
-          >
-            {inv.arabic}
-          </p>
-          
-          {/* Ligne séparatrice */}
-          <div className="h-px bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent mb-1.5" />
-          
-          {/* Français */}
-          <p className="text-white/70 text-[11px] leading-snug italic line-clamp-2">
-            {inv.french}
-          </p>
-        </div>
+      {/* ─── ARABE (lisibilité maximale) ─── */}
+      <div className="px-4 py-3 bg-black/20">
+        <p 
+          dir="rtl" 
+          className="text-right text-[#FCD34D] font-bold leading-[2.2]"
+          style={{
+            fontSize: "1.15rem",           // ← PLUS GRAND
+            fontFamily: "'Amiri', 'Scheherazade New', 'Traditional Arabic', serif", // ← POLICE ARABE
+            textShadow: "0 0 10px rgba(252,211,77,0.15)",
+            wordSpacing: "0.05em",         // ← ESPACEMENT MOTS
+          }}
+        >
+          {inv.arabic}
+        </p>
+      </div>
 
-        {/* Footer avec indicateur */}
-        <div className="px-3 py-1 flex items-center justify-between border-t border-white/5">
-          <div className="flex gap-0.5">
-            {[...Array(3)].map((_, i) => (
-              <div 
-                key={i} 
-                className="w-1 h-1 rounded-full bg-[#C5A059]/40"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
-            ))}
-          </div>
-          <span className="text-[9px] text-white/30">
-            {inv.side === 'left' ? '◀ Gauche' : 'Droite ▶'}
-          </span>
-        </div>
+      {/* ─── SÉPARATEUR ─── */}
+      <div className="mx-4 h-px bg-gradient-to-r from-transparent via-[#C5A059]/40 to-transparent" />
+
+      {/* ─── FRANÇAIS ─── */}
+      <div className="px-4 py-2.5">
+        <p 
+          className="text-white/80 text-[13px] leading-relaxed"
+          style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+        >
+          {inv.french}
+        </p>
       </div>
     </div>
   );
@@ -111,8 +67,8 @@ export default function SideInvocations() {
   const [enabled, setEnabled] = useState(true);
   const [leftIdx, setLeftIdx] = useState(0);
   const [rightIdx, setRightIdx] = useState(0);
-  const [newLeft, setNewLeft] = useState(false);
-  const [newRight, setNewRight] = useState(false);
+  const [leftVis, setLeftVis] = useState(true);
+  const [rightVis, setRightVis] = useState(true);
 
   useEffect(() => {
     fetch("/api/site-mode").then(r=>r.json())
@@ -127,29 +83,27 @@ export default function SideInvocations() {
   }, []);
 
   const rotateLeft = useCallback(() => {
-    setNewLeft(true);
-    setLeftIdx(p => (p+1) % Math.max(1, left.length));
-    setTimeout(() => setNewLeft(false), 500);
+    setLeftVis(false);
+    setTimeout(() => { setLeftIdx(p => (p+1) % Math.max(1,left.length)); setLeftVis(true); }, 600);
   }, [left.length]);
 
   const rotateRight = useCallback(() => {
-    setNewRight(true);
-    setRightIdx(p => (p+1) % Math.max(1, right.length));
-    setTimeout(() => setNewRight(false), 500);
+    setRightVis(false);
+    setTimeout(() => { setRightIdx(p => (p+1) % Math.max(1,right.length)); setRightVis(true); }, 600);
   }, [right.length]);
 
   useEffect(() => {
     if (!enabled || left.length <= 1) return;
-    const id = setInterval(rotateLeft, 8000);
+    const id = setInterval(rotateLeft, 10000);
     return () => clearInterval(id);
   }, [enabled, left.length, rotateLeft]);
 
   useEffect(() => {
     if (!enabled || right.length <= 1) return;
     const t = setTimeout(() => {
-      const id = setInterval(rotateRight, 8000);
+      const id = setInterval(rotateRight, 10000);
       return () => clearInterval(id);
-    }, 4000);
+    }, 5000);
     return () => clearTimeout(t);
   }, [enabled, right.length, rotateRight]);
 
@@ -159,41 +113,31 @@ export default function SideInvocations() {
     <>
       {/* Côté GAUCHE */}
       {left.length > 0 && (
-        <div className="fixed z-30 hidden xl:block"
-          style={{ left: 20, bottom: 100, maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
-          <div className="flex flex-col-reverse gap-2">
-            {/* Afficher les 3 dernières invocations comme un chat */}
-            {[...Array(Math.min(3, left.length))].map((_, i) => {
-              const idx = (leftIdx - i + left.length) % left.length;
-              return (
-                <LiveComment 
-                  key={left[idx].id} 
-                  inv={left[idx]} 
-                  visible={true}
-                  isNew={i === 0 && newLeft}
-                />
-              );
-            })}
+        <div className="fixed z-30 hidden xl:flex flex-col" style={{ left: 16, top: "50%", transform: "translateY(-50%)" }}>
+          <div style={{ opacity: leftVis ? 1 : 0, transform: leftVis ? "translateX(0)" : "translateX(-20px)", transition: "all 0.6s ease" }}>
+            <InvocationCard inv={left[leftIdx]} visible={true} />
+          </div>
+          {/* Indicateurs */}
+          <div className="flex gap-1.5 mt-2 justify-start">
+            {left.map((_, i) => (
+              <div key={i} className="h-1.5 rounded-full transition-all duration-300" 
+                style={{ width: i === leftIdx ? 20 : 6, backgroundColor: i === leftIdx ? "#C5A059" : "rgba(197,160,89,0.2)" }} />
+            ))}
           </div>
         </div>
       )}
 
       {/* Côté DROIT */}
       {right.length > 0 && (
-        <div className="fixed z-30 hidden xl:block"
-          style={{ right: 20, bottom: 100, maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
-          <div className="flex flex-col-reverse gap-2">
-            {[...Array(Math.min(3, right.length))].map((_, i) => {
-              const idx = (rightIdx - i + right.length) % right.length;
-              return (
-                <LiveComment 
-                  key={right[idx].id} 
-                  inv={right[idx]} 
-                  visible={true}
-                  isNew={i === 0 && newRight}
-                />
-              );
-            })}
+        <div className="fixed z-30 hidden xl:flex flex-col items-end" style={{ right: 16, top: "50%", transform: "translateY(-50%)" }}>
+          <div style={{ opacity: rightVis ? 1 : 0, transform: rightVis ? "translateX(0)" : "translateX(20px)", transition: "all 0.6s ease" }}>
+            <InvocationCard inv={right[rightIdx]} visible={true} />
+          </div>
+          <div className="flex gap-1.5 mt-2 justify-end">
+            {right.map((_, i) => (
+              <div key={i} className="h-1.5 rounded-full transition-all duration-300" 
+                style={{ width: i === rightIdx ? 20 : 6, backgroundColor: i === rightIdx ? "#C5A059" : "rgba(197,160,89,0.2)" }} />
+            ))}
           </div>
         </div>
       )}
