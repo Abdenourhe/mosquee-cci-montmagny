@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_Arabic } from "next/font/google";
+import { Inter, Noto_Sans_Arabic, Amiri } from "next/font/google";
 import "./globals.css";
 import ThemeApplier from "@/components/ThemeApplier";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const notoSansArabic = Noto_Sans_Arabic({ subsets: ["arabic"], variable: "--font-noto-arabic", display: "swap", weight: ["400", "600", "700", "800"] });
+const inter = Inter({ 
+  subsets: ["latin"], 
+  variable: "--font-inter", 
+  display: "swap" 
+});
+
+const notoSansArabic = Noto_Sans_Arabic({ 
+  subsets: ["arabic"], 
+  variable: "--font-noto-arabic", 
+  display: "swap", 
+  weight: ["400", "600", "700", "800"] 
+});
+
+const amiri = Amiri({ 
+  subsets: ["arabic"], 
+  variable: "--font-amiri", 
+  display: "swap", 
+  weight: ["400", "700"] 
+});
 
 export const metadata: Metadata = {
   title: "CCI de Montmagny — Centre Culturel Islamique",
@@ -20,7 +37,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${notoSansArabic.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${notoSansArabic.variable} ${amiri.variable}`}>
       <body>
         <ThemeApplier />
         {children}
@@ -28,5 +45,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet" />

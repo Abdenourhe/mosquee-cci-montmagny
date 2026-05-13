@@ -3,7 +3,8 @@
 @import "../styles/animations.css";
 @import "../styles/utilities.css";
 @import "../styles/patterns.css";
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap');
+/* SUPPRIMER CETTE LIGNE : */
+/* @import url('https://fonts.googleapis.com/css2?family=Amiri...'); */
 
 @theme {
   --color-islamic-green:       var(--theme-primary);
@@ -15,21 +16,5 @@
   --color-cream:               var(--theme-cream);
   --color-anthracite:          var(--theme-anthracite);
   --font-sans:   var(--font-inter, "Inter", system-ui, sans-serif);
-  --font-arabic: var(--font-noto-arabic, "Noto Sans Arabic", "Amiri", serif);
-}
-
-body {
-  background-color: var(--theme-bg-body);
-  color: var(--theme-anthracite);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-::selection {
-  background-color: var(--theme-primary);
-  color: white;
+  --font-arabic: var(--font-noto-arabic, var(--font-amiri), "Noto Sans Arabic", "Amiri", serif);
 }

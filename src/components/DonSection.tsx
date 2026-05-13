@@ -81,56 +81,58 @@ export default function DonSection() {
   const title = data.projetTitre || `Soutenir ${data.nomMosquee}`;
 
   return (
-    <section className="py-6 sm:py-8">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="rounded-3xl overflow-hidden"
+    <section className="py-6 sm:py-8 lg:py-10">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden"
           style={{ background: "linear-gradient(160deg,#031F20 0%,#083032 55%,#0D3C3E 100%)", border: "1px solid rgba(197,160,89,0.2)" }}>
 
           {/* ── Gold top bar ── */}
           <div style={{ height: 3, background: "linear-gradient(90deg,transparent,#C5A059 30%,#FCD34D 60%,transparent)" }} />
 
-          <div className="p-6 sm:p-8 lg:p-10">
+          <div className="p-4 sm:p-6 lg:p-8 xl:p-10">
 
             {/* ── Titre du projet ── */}
-            <div className="mb-7 text-center sm:text-left">
-              <div className="text-[10px] font-black uppercase tracking-widest mb-2" style={{ color: "rgba(197,160,89,0.6)" }}>
+            <div className="mb-5 sm:mb-7 text-center sm:text-left">
+              <div className="text-xs sm:text-sm font-black uppercase tracking-widest mb-2" style={{ color: "rgba(197,160,89,0.6)" }}>
                 Campagne de dons — {data.nomMosquee}
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white leading-snug mb-2">{title}</h2>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-snug mb-2">{title}</h2>
               {data.projetResume && (
-                <p className="text-white/55 text-sm leading-relaxed max-w-2xl">{data.projetResume}</p>
+                <p className="text-white/55 text-sm sm:text-base leading-relaxed max-w-2xl">{data.projetResume}</p>
               )}
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
 
               {/* ── Colonne gauche : Progress + Interac ── */}
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
 
                 {/* Chiffres + barre */}
-                <div className="rounded-2xl p-5"
+                <div className="rounded-xl sm:rounded-2xl p-4 sm:p-5"
                   style={{ background: "rgba(0,0,0,0.28)", border: "1px solid rgba(255,255,255,0.05)" }}>
 
-                  <div className="flex items-end justify-between mb-1 gap-2">
-                    <div>
-                      <div className="text-4xl sm:text-5xl font-black leading-none tabular-nums"
+                  <div className="flex items-end justify-between mb-1 gap-2 flex-wrap">
+                    <div className="min-w-0">
+                      <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black leading-none tabular-nums"
                         style={{ color: "#4ADE80" }}>
                         {data.collecte.toLocaleString("fr-CA")} $
                       </div>
-                      <div className="text-white/38 text-xs mt-1">montant collecté</div>
+                      <div className="text-white/38 text-xs sm:text-sm mt-1">montant collecté</div>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <div className="text-4xl font-black tabular-nums" style={{ color: "#FCD34D" }}>{pct}<span className="text-2xl">%</span></div>
-                      <div className="text-white/38 text-xs">{reste.toLocaleString("fr-CA")} $ restant</div>
+                      <div className="text-2xl sm:text-3xl lg:text-4xl font-black tabular-nums" style={{ color: "#FCD34D" }}>
+                        {pct}<span className="text-lg sm:text-xl lg:text-2xl">%</span>
+                      </div>
+                      <div className="text-white/38 text-xs sm:text-sm">{reste.toLocaleString("fr-CA")} $ restant</div>
                     </div>
                   </div>
 
-                  <div className="text-white/30 text-xs mb-4">
+                  <div className="text-white/30 text-xs sm:text-sm mb-3 sm:mb-4">
                     Objectif : <span className="text-white/55 font-black">{data.objectif.toLocaleString("fr-CA")} $</span>
                   </div>
 
                   {/* Barre */}
-                  <div className="rounded-full overflow-hidden" style={{ height: 16, background: "rgba(255,255,255,0.06)" }}>
+                  <div className="rounded-full overflow-hidden" style={{ height: 12, background: "rgba(255,255,255,0.06)" }}>
                     <div className="h-full rounded-full transition-all duration-700 relative"
                       style={{ width: `${pct}%`, background: "linear-gradient(90deg,#C5A059,#4ADE80)", boxShadow: "0 0 16px rgba(74,222,128,0.3)" }}>
                       {pct > 14 && (
@@ -143,20 +145,19 @@ export default function DonSection() {
                 </div>
 
                 {/* Interac */}
-                <div className="rounded-2xl p-5"
+                <div className="rounded-xl sm:rounded-2xl p-4 sm:p-5"
                   style={{ background: "rgba(197,160,89,0.08)", border: "1px solid rgba(197,160,89,0.22)" }}>
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
                     <div className="flex-1 min-w-0">
-                      <div className="text-[10px] font-black uppercase tracking-widest mb-1.5" style={{ color: "rgba(197,160,89,0.6)" }}>
+                      <div className="text-xs sm:text-sm font-black uppercase tracking-widest mb-1.5" style={{ color: "rgba(197,160,89,0.6)" }}>
                         Don par Interac e-Transfer
                       </div>
-                      <div className="font-black text-xl" style={{ color: "#FCD34D" }}>{data.interac}</div>
-                      <div className="text-white/30 text-xs mt-1">Dépôt automatique · sans mot de passe</div>
+                      <div className="font-black text-lg sm:text-xl break-all" style={{ color: "#FCD34D" }}>{data.interac}</div>
+                      <div className="text-white/30 text-xs sm:text-sm mt-1">Dépôt automatique · sans mot de passe</div>
                     </div>
                     {data.qrUrl && (
-                      <div className="flex-shrink-0 bg-white rounded-xl p-1.5 w-14 h-14">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={data.qrUrl} alt="QR" className="w-full h-full object-contain" />
+                      <div className="flex-shrink-0 bg-white rounded-xl p-1.5 w-14 h-14 sm:w-16 sm:h-16 mt-2 sm:mt-0">
+                        <img src={data.qrUrl} alt="QR Code Interac" className="w-full h-full object-contain" />
                       </div>
                     )}
                   </div>
@@ -164,26 +165,26 @@ export default function DonSection() {
 
                 {/* Ayah */}
                 <div className="text-center pt-1">
-                  <p className="text-sm leading-loose" dir="rtl"
-                    style={{ color: "rgba(197,160,89,0.45)", fontFamily: "serif" }}>
+                  <p className="text-sm sm:text-base leading-loose" dir="rtl"
+                    style={{ color: "rgba(197,160,89,0.45)", fontFamily: "var(--font-arabic), serif" }}>
                     مَن ذَا الَّذِي يُقْرِضُ اللَّهَ قَرْضًا حَسَنًا فَيُضَاعِفَهُ لَهُ أَضْعَافًا كَثِيرَةً
                   </p>
-                  <p className="text-white/20 text-xs italic mt-1">
+                  <p className="text-white/20 text-xs sm:text-sm italic mt-1">
                     « Qui est-ce qui prêtera à Allah un beau prêt ? » — Al-Baqarah 2:245
                   </p>
                 </div>
               </div>
 
               {/* ── Colonne droite : Étapes + Photos ── */}
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
 
                 {/* Plan par étape */}
                 {data.years.length > 0 && (
-                  <div className="rounded-2xl overflow-hidden"
+                  <div className="rounded-xl sm:rounded-2xl overflow-hidden"
                     style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-                    <div className="px-4 py-3"
+                    <div className="px-3 sm:px-4 py-2.5 sm:py-3"
                       style={{ background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                      <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: "rgba(197,160,89,0.55)" }}>
+                      <span className="text-xs sm:text-sm font-black uppercase tracking-widest" style={{ color: "rgba(197,160,89,0.55)" }}>
                         Plan de financement par étape
                       </span>
                     </div>
@@ -193,15 +194,15 @@ export default function DonSection() {
                         const col = STEP_COLORS[i % STEP_COLORS.length];
                         const done = p >= 100;
                         return (
-                          <div key={i} className="px-4 py-3.5">
+                          <div key={i} className="px-3 sm:px-4 py-3 sm:py-3.5">
                             <div className="flex items-center justify-between mb-2 gap-2">
                               <div className="flex items-center gap-2 min-w-0">
                                 <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: col, boxShadow: `0 0 6px ${col}80` }} />
-                                <span className="text-white font-bold text-sm truncate">{yr.label}{done ? " ✅" : ""}</span>
+                                <span className="text-white font-bold text-xs sm:text-sm truncate">{yr.label}{done ? " ✅" : ""}</span>
                               </div>
                               <div className="flex items-center gap-2 flex-shrink-0 text-right">
-                                <span className="text-white/35 text-xs">{yr.collected.toLocaleString("fr-CA")} / {yr.goal.toLocaleString("fr-CA")} $</span>
-                                <span className="font-black text-sm w-10 text-right" style={{ color: col }}>{p}%</span>
+                                <span className="text-white/35 text-xs hidden sm:inline">{yr.collected.toLocaleString("fr-CA")} / {yr.goal.toLocaleString("fr-CA")} $</span>
+                                <span className="font-black text-xs sm:text-sm w-10 text-right" style={{ color: col }}>{p}%</span>
                               </div>
                             </div>
                             <div className="rounded-full overflow-hidden" style={{ height: 5, background: "rgba(255,255,255,0.07)" }}>
@@ -218,16 +219,15 @@ export default function DonSection() {
                 {/* Photos */}
                 {data.photos.length > 0 && (
                   <div>
-                    <div className="text-[10px] font-black uppercase tracking-widest mb-2.5" style={{ color: "rgba(197,160,89,0.55)" }}>
+                    <div className="text-xs sm:text-sm font-black uppercase tracking-widest mb-2.5" style={{ color: "rgba(197,160,89,0.55)" }}>
                       Photos du projet
                     </div>
-                    <div className={`grid gap-2 ${data.photos.length === 1 ? "grid-cols-1" : data.photos.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                       {data.photos.slice(0, 6).map((url, i) => (
                         <button key={i} onClick={() => setLightbox(url)}
                           className="rounded-xl overflow-hidden hover:scale-[1.03] transition-transform cursor-zoom-in relative"
                           style={{ aspectRatio: "4/3", border: "1px solid rgba(197,160,89,0.18)" }}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={url} alt="" className="w-full h-full object-cover" />
+                          <img src={url} alt={`Photo projet ${i + 1}`} className="w-full h-full object-cover" />
                           {i === 5 && data.photos.length > 6 && (
                             <div className="absolute inset-0 flex items-center justify-center text-white font-black text-xl"
                               style={{ background: "rgba(0,0,0,0.55)" }}>
@@ -250,8 +250,7 @@ export default function DonSection() {
       {lightbox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/88 p-4"
           onClick={() => setLightbox(null)}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={lightbox} alt="" className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain" />
+          <img src={lightbox} alt="Photo en grand" className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain" />
           <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors flex items-center justify-center text-xl">✕</button>
         </div>
       )}
