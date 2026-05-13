@@ -16,7 +16,7 @@ const CATEGORIES = [
   { key: "ramadan",  label: "Ramadan",              icon: "🌙",  color: "#7C3AED" },
   { key: "eid_fitr", label: "Aïd el-Fitr",          icon: "🌟",  color: "#D97706" },
   { key: "eid_adha", label: "Aïd el-Adha",          icon: "🐑",  color: "#059669" },
-  { key: "achoura",  label: "Achoura",              icon: "📿",  color: "#DC2626" },
+  { key: "ashoura",  label: "Ashoura",              icon: "📿",  color: "#DC2626" },
 ] as const;
 
 const TEAL = "#0D7377";
@@ -148,32 +148,31 @@ export default function InvocationManager({ session }: Props) {
   }
   
   try {
-    const results = await Promise.all(
-      group.map(async (inv) => {
-        const res = await fetch(`/api/invocations/${inv.id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ active: makeActive }),
-        });
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          throw new Error(`Erreur ${res.status}: ${err.error || 'Unknown'}`);
-        }
-        return res.json();
-      })
-    );
+    // Exécuter les PATCH en séquence pour éviter les conflits
+    for (const inv of group) {
+      const res = await fetch(`/api/invocations/${inv.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ active: makeActive }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(`Erreur ${res.status}: ${err.error || 'Unknown'}`);
+      }
+    }
     
-    // Mettre à jour le state avec les données retournées par le serveur
-    setItems((p) => {
-      const updatedIds = new Set(results.map((r) => r.id));
-      return p.map((x) => updatedIds.has(x.id) ? { ...x, active: makeActive } : x);
-    });
+    // Mettre à jour le state immédiatement
+    setItems((prev) => prev.map((x) => 
+      x.category === catKey ? { ...x, active: makeActive } : x
+    ));
     
     const label = CATEGORIES.find((c) => c.key === catKey)?.label ?? catKey;
     notify(true, (makeActive ? label + " activé." : label + " désactivé."));
   } catch (err: any) {
     console.error("toggleGroup error:", err);
     notify(false, "Erreur lors de la mise à jour: " + (err.message || "inconnue"));
+    // Recharger les données en cas d'erreur
+    fetchAll();
   }
 }; 
 
