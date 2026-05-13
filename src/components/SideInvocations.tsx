@@ -22,6 +22,14 @@ const CATEGORY_ICONS: Record<string, string> = {
   ashoura: "📿",
 };
 
+const CATEGORY_LABELS: Record<string, string> = {
+  daily: "Invocation du jour",
+  ramadan: "Ramadan",
+  eid_fitr: "Aïd el-Fitr",
+  eid_adha: "Aïd el-Adha",
+  ashoura: "Achoura",
+};
+
 const CATEGORY_COLORS: Record<string, string> = {
   daily: "#0D7377",
   ramadan: "#7C3AED",
@@ -65,6 +73,7 @@ function InvocationCard({
 
   const catColor = CATEGORY_COLORS[inv.category] || "#0D7377";
   const catIcon = CATEGORY_ICONS[inv.category] || "🤲";
+  const catLabel = CATEGORY_LABELS[inv.category] || "Invocation";
 
   return (
     <div 
@@ -110,23 +119,33 @@ function InvocationCard({
         {index + 1}/{total}
       </div>
 
-      {/* ─── HEADER TRANSPARENT ─── */}
-      <div className="flex items-center gap-2.5 px-3 py-2">
+      {/* ═══ HEADER STYLE HADITH ═══ */}
+      <div 
+        className="flex items-center gap-3 px-4 py-3 mx-2 mt-2 rounded-xl"
+        style={{
+          background: "rgba(25, 97, 80, 0.07)",
+          backdropFilter: "transparent",
+          border: "none",
+        }}
+      >
+        {/* Icône carrée arrondie */}
         <div 
-          className="w-7 h-7 rounded-full flex items-center justify-center text-base flex-shrink-0"
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
           style={{ 
-            background: `linear-gradient(135deg, ${catColor}, #14B8A6)`,
-            boxShadow: `0 2px 8px ${catColor}40`,
+            background: "rgba(197, 159, 89, 0.29)",
+            border: "1px solid rgba(126, 107, 59, 0.45)",
           }}
         >
           {catIcon}
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-[#0D7377] text-[11px] font-black uppercase tracking-wide truncate">
+        
+        {/* Texte */}
+        <div className="min-w-0">
+          <p className="text-[#0D7377] font-bold text-sm truncate">
             {inv.label}
           </p>
-          <p className="text-[#0D7377]/50 text-[9px] font-medium">
-            {inv.side === 'left' ? '◀ Côté gauche' : 'Côté droit ▶'}
+          <p className="text-[#0D7377]/50 text-xs">
+            {catLabel}
           </p>
         </div>
       </div>
@@ -144,7 +163,7 @@ function InvocationCard({
             fontFamily: "var(--font-arabic)",
             fontWeight: 800,
             lineHeight: "2.4",
-            color: "#022c22",
+            color: "#01221a",
             textShadow: "0 1px 2px rgba(255,255,255,0.5)",
             wordSpacing: "0.05em",
             letterSpacing: "0.01em",
