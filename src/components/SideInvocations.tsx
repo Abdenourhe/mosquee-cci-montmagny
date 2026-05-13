@@ -34,7 +34,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 // COMPOSANT CARTE
 // ═══════════════════════════════════════════════════════════
 
-function LiveCommentCard({ 
+function InvocationCard({ 
   inv, 
   visible, 
   isNew, 
@@ -110,8 +110,8 @@ function LiveCommentCard({
         {index + 1}/{total}
       </div>
 
-      {/* ─── HEADER ─── */}
-      <div className="flex items-center gap-2.5 px-3 py-2 border-b border-[#0D7377]/10">
+      {/* ─── HEADER TRANSPARENT ─── */}
+      <div className="flex items-center gap-2.5 px-3 py-2">
         <div 
           className="w-7 h-7 rounded-full flex items-center justify-center text-base flex-shrink-0"
           style={{ 
@@ -307,7 +307,7 @@ export default function SideInvocations() {
             transform: leftVis ? "translateY(0)" : "translateY(20px)", 
             transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
           }}>
-            <LiveCommentCard 
+            <InvocationCard 
               inv={left[leftIdx]} 
               visible={true} 
               isNew={newLeft}
@@ -386,7 +386,7 @@ export default function SideInvocations() {
             transform: rightVis ? "translateY(0)" : "translateY(20px)", 
             transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
           }}>
-            <LiveCommentCard 
+            <InvocationCard 
               inv={right[rightIdx]} 
               visible={true} 
               isNew={newRight}
@@ -467,7 +467,7 @@ export default function SideInvocations() {
               onClick={() => setFocusedSide(null)}
             >
               <div onClick={(e) => e.stopPropagation()}>
-                <LiveCommentCard 
+                <InvocationCard 
                   inv={focusedSide === "left" ? left[leftIdx] : right[rightIdx]} 
                   visible={true} 
                   isNew={false}
