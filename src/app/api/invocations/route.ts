@@ -4,10 +4,13 @@ import { prisma } from "@/lib/db";
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const group = searchParams.get("group");
+    const all = searchParams.get("all") === "1";
+    const category = searchParams.get("category");  // ← CHANGÉ: group → category
 
     const invocations = await prisma.invocation.findMany({
-      where: group ? { active: true, group } : { active: true },
+      where: all 
+        ? (category ? { category } : {})               // ← CHANGÉ
+        : { active: true, ...(category ? { category } : {}) }, // ← CHANGÉ
       orderBy: { order: "asc" },
     });
     
@@ -21,7 +24,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { label, arabic, french, side, active, order, group } = body;
+    const { label, arabic, french, side, active, order, category } = body;  // ← CHANGÉ
     
     if (!label?.trim() || !arabic?.trim() || !french?.trim()) {
       return NextResponse.json({ error: "label, arabic et french requis" }, { status: 400 });
@@ -35,7 +38,7 @@ export async function POST(req: Request) {
         side: side ?? "left",
         active: active !== false,
         order: typeof order === "number" ? order : 0,
-        group: group ?? "general",
+        category: category ?? "daily",  // ← CHANGÉ
       },
     });
     
