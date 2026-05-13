@@ -141,20 +141,41 @@ export default function InvocationManager({ session }: Props) {
   });
 
   const toggleGroup = async (catKey: string, makeActive: boolean) => {
-    const group = items.filter((i) => i.category === catKey);
-    try {
-      await Promise.all(group.map((inv) =>
-        fetch(`/api/invocations/${inv.id}`, {
+  const group = items.filter((i) => i.category === catKey);
+  if (group.length === 0) {
+    notify(false, "Aucune invocation dans cette catégorie.");
+    return;
+  }
+  
+  try {
+    const results = await Promise.all(
+      group.map(async (inv) => {
+        const res = await fetch(`/api/invocations/${inv.id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ active: makeActive }),
-        })
-      ));
-      setItems((p) => p.map((x) => x.category === catKey ? { ...x, active: makeActive } : x));
-      const label = CATEGORIES.find((c) => c.key === catKey)?.label ?? catKey;
-      notify(true, (makeActive ? label + " activé." : label + " désactivé."));
-    } catch { notify(false, "Erreur lors de la mise à jour."); }
-  };
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(`Erreur ${res.status}: ${err.error || 'Unknown'}`);
+        }
+        return res.json();
+      })
+    );
+    
+    // Mettre à jour le state avec les données retournées par le serveur
+    setItems((p) => {
+      const updatedIds = new Set(results.map((r) => r.id));
+      return p.map((x) => updatedIds.has(x.id) ? { ...x, active: makeActive } : x);
+    });
+    
+    const label = CATEGORIES.find((c) => c.key === catKey)?.label ?? catKey;
+    notify(true, (makeActive ? label + " activé." : label + " désactivé."));
+  } catch (err: any) {
+    console.error("toggleGroup error:", err);
+    notify(false, "Erreur lors de la mise à jour: " + (err.message || "inconnue"));
+  }
+}; 
 
   const deleteInv = async (id: string) => {
     if (!confirm("Supprimer cette invocation ?")) return;
