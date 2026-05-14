@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import GlassCard from "./GlassCard";
 import StatCard from "./StatCard";
-import WaveDivider from "./WaveDivider";
 
 const STATS = [
   { n: "5", l: "Prières / jour" },
@@ -27,15 +26,54 @@ export default function Hero() {
   return (
     <section id="accueil" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       
-      {/* Background */}
-      <div ref={bgRef} className="absolute inset-0 z-0">
-        <div className="hero-gradient absolute inset-0" />
-        <div className="pattern-overlay pattern-hex" />
-        <div className="radial-glow absolute inset-0" />
-      </div>
+      {/* ═══ BACKGROUND STYLE EHLQURAN.COM ═══ */}
+      <div ref={bgRef} className="absolute inset-0 z-0 pointer-events-none">
+        
+        {/* Dégradé principal vert-bleu */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(160deg, #1a4a4a 0%, #2d6a6a 35%, #3d7a7a 70%, #4a8a8a 100%)"
+          }}
+        />
+        
+        {/* Motif géométrique islamique — SUBTIL */}
+        <div className="absolute inset-0 pattern-islamic-girih" />
+        
+        {/* Motif maille secondaire (très subtil) */}
+        <div 
+          className="absolute inset-0 pattern-islamic-mesh"
+          style={{ mixBlendMode: "overlay", opacity: 0.5 }}
+        />
+        
+        {/* Lignes diagonales subtils pour texture */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 35px,
+              rgba(255,255,255,0.01) 35px,
+              rgba(255,255,255,0.01) 70px
+            )`
+          }}
+        />
+        
+        {/* Glow radial au centre */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 55%)"
+          }}
+        />
+        
+        {/* Vignette sombre aux bords */}
+        <div className="absolute inset-0 vignette-overlay" />
+      </div>  
 
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-24">
+      {/* Content - CENTRÉ et limité en largeur */}
+      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-32 overflow-x-hidden">
 
         {/* Badge */}
         <div className="flex justify-center mb-7 animate-slideUp delay-200">
@@ -46,7 +84,7 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Title avec effet lumière subtil SANS CADRE */}
+        {/* Title */}
         <div className="text-center mb-10 animate-slideUp delay-300">
           <h1 className="font-black leading-none tracking-tight text-white mb-2 hero-title-glow"
             style={{ fontSize: "clamp(2.5rem, 8vw, 5.5rem)" }}>
@@ -58,8 +96,8 @@ export default function Hero() {
           </h2>
         </div>
 
-        {/* Two Cards */}
-        <div className="grid md:grid-cols-2 gap-5 mb-10 animate-slideUp delay-400">
+        {/* Two Cards - CENTRÉES, pas de débordement */}
+        <div className="grid md:grid-cols-2 gap-5 mb-10 animate-slideUp delay-400 max-w-4xl mx-auto">
           
           {/* Hadith Card */}
           <GlassCard>
@@ -130,11 +168,24 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Wave Transition */}
-      <WaveDivider fill="var(--theme-bg-body)" height={80} className="absolute bottom-0 left-0 right-0" />
+      {/* ═══ VAGUE BLANCHE EN BAS (style ehlquran.com) ═══ */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
+        <svg 
+          viewBox="0 0 1440 120" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+          className="block w-full h-auto"
+          style={{ minHeight: "80px" }}
+        >
+          <path 
+            d="M0,60 C360,120 720,0 1080,60 C1260,90 1350,30 1440,60 L1440,120 L0,120 Z" 
+            fill="var(--theme-bg-body, #F8F6F1)"
+          />
+        </svg>
+      </div>
 
       {/* Scroll Indicator */}
-      <a href="#horaires" className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 text-white/30 hover:text-white/70 transition-colors animate-bounce">
+      <a href="#horaires" className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 text-white/30 hover:text-white/70 transition-colors animate-bounce">
         <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>

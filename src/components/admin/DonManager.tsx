@@ -15,12 +15,12 @@ const FIELDS: DonField[] = [
   { key: "ville",          label: "Ville",                      icon: "📍", type: "text",     placeholder: "Montmagny, Qc" },
   { key: "projet_titre",   label: "Titre du projet",            icon: "🏗", type: "text",     hint: "Titre affiché en en-tête de la section dons", placeholder: "Construction / Rénovation de la mosquée" },
   { key: "projet_resume",  label: "Résumé du projet (site public)", icon: "📄", type: "textarea", hint: "Description détaillée visible sur le site", placeholder: "Notre communauté travaille à..." },
-  { key: "objectif",       label: "Objectif total ($)",         icon: "🎯", type: "number",   hint: "Utilisé si le plan pluriannuel n'est pas défini", placeholder: "50000" },
-  { key: "collecte",       label: "Montant collecté ($)",       icon: "💰", type: "number",   hint: "Utilisé si le plan pluriannuel n'est pas défini", placeholder: "0" },
+  { key: "objectif",       label: "Objectif total ($)",         icon: "🎯", type: "number",   hint: "Utilisé si le plan pluriannuel n&apos;est pas défini", placeholder: "50000" },
+  { key: "collecte",       label: "Montant collecté ($)",       icon: "💰", type: "number",   hint: "Utilisé si le plan pluriannuel n&apos;est pas défini", placeholder: "0" },
   { key: "depenses_fixes", label: "Dépenses fixes / mois ($)",  icon: "📊", type: "number",   hint: "Loyer, électricité, etc.", placeholder: "1000" },
   { key: "interac_email",  label: "Courriel Interac",           icon: "💳", type: "email",    placeholder: "Montmagny.ccim@gmail.com" },
-  { key: "description",    label: "Message de motivation (TV)", icon: "✍️", type: "textarea", hint: "Affiché sur l'écran TV", placeholder: "Votre générosité est la clé de notre succès." },
-  { key: "ticker_text",    label: "Texte du bandeau TV",        icon: "📢", type: "textarea", hint: "Texte défilant en bas de l'écran TV", placeholder: "جزاك الله خيراً على صدقتك..." },
+  { key: "description",    label: "Message de motivation (TV)", icon: "✍️", type: "textarea", hint: "Affiché sur l&apos;écran TV", placeholder: "Votre générosité est la clé de notre succès." },
+  { key: "ticker_text",    label: "Texte du bandeau TV",        icon: "📢", type: "textarea", hint: "Texte défilant en bas de l&apos;écran TV", placeholder: "جزاك الله خيراً sur صدقتك..." },
   { key: "ticker_direction", label: "Direction du bandeau",     icon: "↔️", type: "direction", hint: "RTL = droite→gauche (arabe) · LTR = gauche→droite (français)" },
   { key: "qr_code_url",    label: "URL du QR Code",             icon: "📱", type: "url",      hint: "Image QR Code pour les dons", placeholder: "https://..." },
   { key: "share_facebook",  label: "Page Facebook",             icon: "📘", type: "url",      hint: "URL de la page Facebook", placeholder: "https://facebook.com/..." },
@@ -141,7 +141,7 @@ export default function DonManager({ session }: Props) {
         const created: ContentRow = await r.json();
         setPhotos((p) => [...p, created]);
       }
-    } catch { setError("Erreur lors de l'upload."); }
+    } catch { setError("Erreur lors de l&apos;upload."); }
     finally   { setUploading(false); if (fileRef.current) fileRef.current.value = ""; }
   };
 

@@ -21,7 +21,7 @@ const NAV = (unread: number) => [
   { href: "/admin/content",       icon: "📝", label: "Contenus",           group: "content" },
   { href: "/admin/social",        icon: "🌐", label: "Réseaux sociaux",    group: "content" },
   { href: "/admin/don",           icon: "💰", label: "Dons",                group: "content" },
-  { href: "/admin/khotba",        icon: "📖", label: "Khotba Jumu'ah",      group: "content" },
+  { href: "/admin/khotba",        icon: "📖", label: "Khotba Jumu&apos;ah",      group: "content" },
   { href: "/admin/messages",      icon: "💬", label: unread > 0 ? `Messages (${unread})` : "Messages", group: "tools" },
   { href: "/affichage",           icon: "📺", label: "Affichage TV",         group: "tools"   },
   { href: "/admin/users",         icon: "👥", label: "Administrateurs",    group: "tools"   },

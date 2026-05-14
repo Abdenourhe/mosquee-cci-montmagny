@@ -138,7 +138,7 @@ function MasonryCard({ a, height, index }: { a: Activity; height: number; index:
   const [isVisible, setIsVisible] = useState(false);
   const hasPhotos = a.photos.length > 0;
 
-  // Animation d'entrée : glissement depuis la gauche
+  // Animation d&apos;entrée : glissement depuis la gauche
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);

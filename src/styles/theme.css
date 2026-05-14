@@ -74,3 +74,12 @@ html.mode-eid-adha {
   --theme-bg-body:       #FDF5E8;
   --theme-section-alt:   #FEF0D8;
 }
+
+:root {
+ 
+  /* ── Nouveau fond style ehlquran.com ── */
+  --theme-hero-ehlquran-from:   #1a5f5f;  /* Vert-bleu foncé */
+  --theme-hero-ehlquran-mid:    #2d6a6a;  /* Vert-bleu principal */
+  --theme-hero-ehlquran-to:     #3d7a7a;  /* Vert-bleu clair */
+  --theme-pattern-opacity:      0.12;     /* Opacité du motif */
+}
