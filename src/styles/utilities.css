@@ -30,7 +30,7 @@
   border-radius: 0.75rem;
   font-weight: 700;
   font-size: 1rem;
-  color: white;
+  color: rgb(255, 255, 255);
   background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-dark) 100%);
   border: 1px solid rgba(255,255,255,0.15);
   transition: all 0.3s ease;

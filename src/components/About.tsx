@@ -24,17 +24,12 @@ const DEFAULT_CARDS = [
 ];
 
 export default function About({ paragraphs = [], cards = [] }: AboutProps) {
-  // Paragraphs: filter out old "À propos de la CCI" catch-all, sort by order
   const paras = paragraphs.length > 0
-    ? paragraphs
-        .sort((a, b) => a.order - b.order)
-        .map((p) => p.body)
+    ? paragraphs.sort((a, b) => a.order - b.order).map((p) => p.body)
     : DEFAULT_PARAGRAPHS;
 
-  // Cards: parse "ICON TITLE" from item.title, body = description
   const valueCards = cards.length > 0
     ? cards.sort((a, b) => a.order - b.order).map((c) => {
-        // title format: "🕌 Lieu de prière"
         const raw = c.title ?? "";
         const match = raw.match(/^(\p{Emoji_Presentation}|\p{Extended_Pictographic})\s+(.+)$/u);
         return {
@@ -51,20 +46,21 @@ export default function About({ paragraphs = [], cards = [] }: AboutProps) {
 
         {/* Left — text + Quran card */}
         <div>
-          <div className="space-y-4 text-gray-600 text-base leading-relaxed mb-8" style={{textAlign:"justify"}}>
+          {/* Texte — couleur vert foncé au lieu de gris */}
+          <div className="space-y-4 text-[#1A3A3A] text-base leading-relaxed mb-8" style={{textAlign:"justify"}}>
             {paras.map((text, i) => (
               <p key={i}>{text}</p>
             ))}
           </div>
 
-          {/* Quran quote card */}
+          {/* Quran quote card — fond dégradé CMYK */}
           <div className="rounded-[2rem] p-8 relative overflow-hidden
-            bg-gradient-to-br from-[var(--theme-hero-from)] via-[var(--theme-hero-mid)] to-[var(--theme-hero-to)]
-            shadow-[0_12px_40px_rgba(13,115,119,0.25),0_4px_12px_rgba(13,115,119,0.1)]">
+            bg-gradient-to-br from-[#0A2E2E] via-[#1A4A4A] to-[#2D6A6A]
+            shadow-[0_12px_40px_rgba(0,168,168,0.25),0_4px_12px_rgba(0,168,168,0.1)]">
             <div className="absolute inset-0 opacity-5">
               <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                 <pattern id="about-geo" width="50" height="50" patternUnits="userSpaceOnUse">
-                  <polygon points="25,2 48,13 48,37 25,48 2,37 2,13" fill="none" stroke="var(--theme-gold)" strokeWidth="0.8"/>
+                  <polygon points="25,2 48,13 48,37 25,48 2,37 2,13" fill="none" stroke="#D4A843" strokeWidth="0.8"/>
                 </pattern>
                 <rect width="100%" height="100%" fill="url(#about-geo)"/>
               </svg>
@@ -72,12 +68,12 @@ export default function About({ paragraphs = [], cards = [] }: AboutProps) {
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-xl">📖</span>
-                <span className="text-xs font-bold uppercase tracking-wider text-[var(--theme-gold)]/80">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D4A843]/80">
                   Sourate Al-Baqara · 3:103
                 </span>
               </div>
               <p className="text-right text-xl leading-loose mb-4" dir="rtl"
-                style={{ color: "var(--theme-gold-light)", fontFamily: "var(--font-arabic, serif)" }}>
+                style={{ color: "#E8C878", fontFamily: "var(--font-arabic, serif)" }}>
                 وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا
               </p>
               <div className="gold-divider mb-4" />
@@ -88,20 +84,23 @@ export default function About({ paragraphs = [], cards = [] }: AboutProps) {
           </div>
         </div>
 
-        {/* Right — value cards */}
+        {/* Right — value cards — fond vert clair au lieu de blanc */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {valueCards.map((v, i) => (
             <div key={i}
-              className="rounded-[2rem] p-6 bg-white
-                shadow-[0_8px_32px_rgba(13,115,119,0.06),0_2px_8px_rgba(13,115,119,0.03)]
-                hover:shadow-[0_16px_48px_rgba(13,115,119,0.12),0_6px_16px_rgba(13,115,119,0.08)]
+              className="rounded-[2rem] p-6 
+                bg-gradient-to-br from-[#D4E2DF] to-[#C8D8D5]
+                shadow-[0_8px_32px_rgba(0,168,168,0.06),0_2px_8px_rgba(0,168,168,0.03)]
+                hover:shadow-[0_16px_48px_rgba(0,168,168,0.12),0_6px_16px_rgba(0,168,168,0.08)]
                 hover:-translate-y-1.5 transition-all duration-500">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5
-                bg-gradient-to-br from-[var(--theme-primary)]/10 to-[var(--theme-primary-light)]/10 shadow-inner">
+                bg-gradient-to-br from-[#00A8A8]/10 to-[#40C0C0]/10 shadow-inner">
                 {v.icon}
               </div>
-              <h3 className="font-black text-gray-900 mb-2 text-lg">{v.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
+              {/* Titre — vert foncé au lieu de gris */}
+              <h3 className="font-black text-[#1A3A3A] mb-2 text-lg">{v.title}</h3>
+              {/* Description — vert moyen au lieu de gris */}
+              <p className="text-[#4A7A7A] text-sm leading-relaxed">{v.desc}</p>
             </div>
           ))}
         </div>

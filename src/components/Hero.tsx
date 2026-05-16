@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import GlassCard from "./GlassCard";
 import StatCard from "./StatCard";
+import { IconBeads, IconBook, IconClock, IconMail } from "./IconCMYK";
 
 const STATS = [
   { n: "5", l: "Prières / jour" },
@@ -26,60 +27,82 @@ export default function Hero() {
   return (
     <section id="accueil" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       
-      {/* ═══ BACKGROUND STYLE EHLQURAN.COM ═══ */}
+      {/* ═══ BACKGROUND CMYK ISLAMIQUE ═══ */}
       <div ref={bgRef} className="absolute inset-0 z-0 pointer-events-none">
         
-        {/* Dégradé principal vert-bleu */}
+        {/* Dégradé CMYK */}
         <div 
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(160deg, #1a4a4a 0%, #2d6a6a 35%, #3d7a7a 70%, #4a8a8a 100%)"
+            background: "linear-gradient(160deg, #0A2E2E 0%, #1A4A4A 25%, #2D6A6A 50%, #00A8A8 75%, #40C0C0 100%)"
           }}
         />
         
-        {/* Motif géométrique islamique — SUBTIL */}
-        <div className="absolute inset-0 pattern-islamic-girih" />
+        {/* Motif gouttes CMYK */}
+        <div className="absolute inset-0 pattern-cmyk-drops" />
         
-        {/* Motif maille secondaire (très subtil) */}
+        {/* Motif gouttes vertes */}
         <div 
-          className="absolute inset-0 pattern-islamic-mesh"
-          style={{ mixBlendMode: "overlay", opacity: 0.5 }}
+          className="absolute inset-0 pattern-green-drops"
+          style={{ mixBlendMode: "overlay", opacity: 0.6 }}
         />
         
-        {/* Lignes diagonales subtils pour texture */}
+        {/* Motif hexagone */}
+        <div 
+          className="absolute inset-0 pattern-cmyk-hex"
+          style={{ opacity: 0.3 }}
+        />
+        
+        {/* Lignes subtils */}
         <div 
           className="absolute inset-0"
           style={{
             backgroundImage: `repeating-linear-gradient(
               45deg,
               transparent,
-              transparent 35px,
-              rgba(255,255,255,0.01) 35px,
-              rgba(255,255,255,0.01) 70px
+              transparent 40px,
+              rgba(0,168,168,0.02) 40px,
+              rgba(0,168,168,0.02) 80px
             )`
           }}
         />
         
-        {/* Glow radial au centre */}
+        {/* Glow cyan */}
         <div 
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 55%)"
+            background: "radial-gradient(ellipse at 30% 40%, rgba(0,168,168,0.08) 0%, transparent 50%)"
           }}
         />
         
-        {/* Vignette sombre aux bords */}
+        {/* Glow magenta */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 70% 60%, rgba(139,46,90,0.06) 0%, transparent 50%)"
+          }}
+        />
+        
+        {/* Glow or */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 50% 80%, rgba(212,168,67,0.05) 0%, transparent 50%)"
+          }}
+        />
+        
+        {/* Vignette */}
         <div className="absolute inset-0 vignette-overlay" />
       </div>  
 
-      {/* Content - CENTRÉ et limité en largeur */}
+      {/* Content */}
       <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-32 overflow-x-hidden">
 
         {/* Badge */}
         <div className="flex justify-center mb-7 animate-slideUp delay-200">
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-amber-200 px-5 py-2 rounded-full
-            bg-white/[0.07] border border-[var(--theme-border-gold)] backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#E8C878] px-5 py-2 rounded-full
+            bg-[rgba(0,168,168,0.15)] border border-[rgba(212,168,67,0.3)] backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#D4A843] animate-pulse" />
             Montmagny, Québec — Canada
           </span>
         </div>
@@ -90,29 +113,29 @@ export default function Hero() {
             style={{ fontSize: "clamp(2.5rem, 8vw, 5.5rem)" }}>
             Centre Culturel Islamique
           </h1>
-          <h2 className="font-black leading-none tracking-tight text-gold-gradient hero-title-glow-gold"
+          <h2 className="font-black leading-none tracking-tight text-[#D4A843] hero-title-glow-gold"
             style={{ fontSize: "clamp(2.8rem, 9vw, 6.5rem)" }}>
             de Montmagny
           </h2>
         </div>
 
-        {/* Two Cards - CENTRÉES, pas de débordement */}
+        {/* Two Cards */}
         <div className="grid md:grid-cols-2 gap-5 mb-10 animate-slideUp delay-400 max-w-4xl mx-auto">
           
-          {/* Hadith Card */}
+          {/* ═══ HADITH CARD ═══ */}
           <GlassCard>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl
-                bg-[rgba(197,160,89,0.2)] border border-[var(--theme-border-gold)]">
-                📿
+                bg-[rgba(0,168,168,0.2)] border border-[rgba(212,168,67,0.3)]">
+                <IconBeads className="w-5 h-5" />
               </div>
               <div>
                 <div className="text-white font-black text-sm">Hadith</div>
-                <div className="text-[var(--theme-gold-light)]/60 text-xs">Du quotidien</div>
+                <div className="text-[#E8C878]/60 text-xs">Du quotidien</div>
               </div>
             </div>
-            <p className="text-right leading-loose mb-3 text-lg" dir="rtl"
-              style={{ color: "var(--theme-gold-light)", fontFamily: "var(--font-arabic, serif)" }}>
+            <p className="text-right leading-loose mb-3 text-[1.05rem]" dir="rtl"
+              style={{ color: "#E8C878", fontFamily: "var(--font-arabic, serif)" }}>
               وَالَّذِي نَفْسِي بِيَدِهِ، لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ
             </p>
             <div className="gold-divider mb-3" />
@@ -121,20 +144,20 @@ export default function Hero() {
             </p>
           </GlassCard>
 
-          {/* Quran Card */}
+          {/* ═══ QURAN CARD ═══ */}
           <GlassCard>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl
-                bg-[rgba(197,160,89,0.2)] border border-[var(--theme-border-gold)]">
-                📖
+                bg-[rgba(0,168,168,0.2)] border border-[rgba(212,168,67,0.3)]">
+                <IconBook className="w-5 h-5" />
               </div>
               <div>
                 <div className="text-white font-black text-sm">Sourate Al-Baqara</div>
-                <div className="text-[var(--theme-gold-light)]/60 text-xs">Coran 2:238</div>
+                <div className="text-[#E8C878]/60 text-xs">Coran 2:238</div>
               </div>
             </div>
             <p className="text-right leading-loose mb-3 text-[1.05rem]" dir="rtl"
-              style={{ color: "var(--theme-gold-light)", fontFamily: "var(--font-arabic, serif)" }}>
+              style={{ color: "#E8C878", fontFamily: "var(--font-arabic, serif)" }}>
               حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ
             </p>
             <div className="gold-divider mb-3" />
@@ -146,16 +169,18 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14 animate-slideUp delay-500">
-          <a href="#horaires" className="btn-primary" style={{ boxShadow: "0 6px 24px var(--theme-btn-shadow)" }}>
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <a href="#horaires" className="btn-primary flex items-center gap-2" style={{ 
+            background: "linear-gradient(135deg, #00A8A8, #40C0C0)",
+            boxShadow: "0 6px 24px rgba(0,168,168,0.5)" 
+          }}>
+            <IconClock className="w-5 h-5" />
             Horaires des Prières
           </a>
-          <a href="#contact" className="btn-secondary">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
+          <a href="#contact" className="btn-secondary flex items-center gap-2" style={{
+            border: "1px solid rgba(212,168,67,0.4)",
+            color: "#E8C878"
+          }}>
+            <IconMail className="w-5 h-5" />
             Nous contacter
           </a>
         </div>
@@ -168,7 +193,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ═══ VAGUE BLANCHE EN BAS (style ehlquran.com) ═══ */}
+      {/* ═══ VAGUE CMYK EN BAS ═══ */}
       <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
         <svg 
           viewBox="0 0 1440 120" 
@@ -179,7 +204,7 @@ export default function Hero() {
         >
           <path 
             d="M0,60 C360,120 720,0 1080,60 C1260,90 1350,30 1440,60 L1440,120 L0,120 Z" 
-            fill="var(--theme-bg-body, #F8F6F1)"
+            fill="#e0ebe842"
           />
         </svg>
       </div>

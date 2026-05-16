@@ -3,18 +3,110 @@
 @import "../styles/animations.css";
 @import "../styles/utilities.css";
 @import "../styles/patterns.css";
-/* SUPPRIMER CETTE LIGNE : */
-/* @import url('https://fonts.googleapis.com/css2?family=Amiri...'); */
 
 @theme {
-  --color-islamic-green:       var(--theme-primary);
-  --color-islamic-green-dark:  var(--theme-primary-dark);
-  --color-islamic-green-light: var(--theme-primary-light);
-  --color-gold:                var(--theme-gold);
-  --color-gold-light:          var(--theme-gold-light);
-  --color-gold-dark:           var(--theme-gold-dark);
+  --color-islamic-green:       var(--theme-cyan);
+  --color-islamic-green-dark:  #006666;
+  --color-islamic-green-light: #40C0C0;
+  --color-gold:                var(--theme-yellow);
+  --color-gold-light:          #E8C878;
+  --color-gold-dark:           #A07828;
   --color-cream:               var(--theme-cream);
-  --color-anthracite:          var(--theme-anthracite);
+  --color-anthracite:          var(--theme-key);
   --font-sans:   var(--font-inter, "Inter", system-ui, sans-serif);
   --font-arabic: var(--font-noto-arabic, var(--font-amiri), "Noto Sans Arabic", "Amiri", serif);
+}
+
+/* ═══════════════════════════════════════════
+   FOND GLOBAL CMYK
+   ═══════════════════════════════════════════ */
+
+html {
+  background-color: #1A2A2A;
+}
+
+body {
+  background-color: #E0EBE8;
+  color: #1A2A2A;
+}
+
+#__next,
+main,
+#root {
+  background-color: #E0EBE8;
+}
+
+/* ── Sections ── */
+section {
+  background-color: transparent;
+}
+
+section[data-alt="true"],
+.section-alt {
+  background-color: #D0E0DC;
+}
+
+
+/* ── Modal ── */
+[role="dialog"],
+[role="alertdialog"],
+.modal,
+.overlay {
+  background-color: rgba(208, 224, 220, 0.98) !important;
+}
+
+/* ── Input ── */
+input,
+textarea,
+select {
+  background-color: #D0E0DC;
+  border-color: rgba(0, 168, 168, 0.2);
+  color: #1A2A2A;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: #C0D8D4;
+  border-color: #00A8A8;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A2A2A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00A8A8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #40C0C0;
+}
+
+/* ── Sélection ── */
+::selection {
+  background-color: rgba(212, 168, 67, 0.3);
+  color: #1A2A2A;
+}
+
+
+/* ═══════════════════════════════════════════
+   ÉTIQUETTES INVOCATIONS — Style CMYK
+   ═══════════════════════════════════════════ */
+
+.invocation-tag {
+  background: linear-gradient(135deg, #0A2E2E 0%, #1A4A4A 100%) !important;
+  border: 1px solid rgba(0, 168, 168, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.invocation-tag:hover {
+  transform: scale(1.02) !important;
+  border-color: rgba(0, 168, 168, 0.5) !important;
 }
