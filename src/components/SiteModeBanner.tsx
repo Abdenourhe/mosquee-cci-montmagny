@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getSiteMode } from "@/lib/site-mode-client";
 
 type Mode = "normal" | "ramadan" | "eid_fitr" | "eid_adha";
 
@@ -36,8 +37,7 @@ export default function SiteModeBanner() {
   const [mode, setMode] = useState<Mode>("normal");
 
   useEffect(() => {
-    fetch("/api/site-mode")
-      .then((r) => r.json())
+    getSiteMode()
       .then((d) => setMode((d.mode as Mode) ?? "normal"))
       .catch(() => {});
   }, []);

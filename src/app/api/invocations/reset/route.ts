@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireAdmin, unauthorized } from "@/lib/auth";
 
 const INVOCATIONS = [
   // ═══════════════════════════════════════════════════════════
@@ -442,6 +443,7 @@ const INVOCATIONS = [
 ];
 
 export async function POST() {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     // Supprimer toutes les invocations existantes
     await prisma.invocation.deleteMany();

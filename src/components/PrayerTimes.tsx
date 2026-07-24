@@ -17,9 +17,9 @@ export default function PrayerTimes() {
         <div className="hidden sm:block h-[540px]">
           <iframe
             src="//mawaqit.net/fr/w/cci-de-montmagny-qc-g5v-1j9-canada?showOnly5PrayerTimes=0"
-            scrolling="no"
             className="w-full h-full block border-none"
-            title="Horaires des prieres CCI Montmagny"
+            style={{ overflow: "hidden" }}
+            title="Horaires des prières CCI Montmagny"
           />
         </div>
       </GlassCard>
@@ -35,9 +35,9 @@ export default function PrayerTimes() {
         <div className="h-[700px]">
           <iframe
             src="//mawaqit.net/fr/m/cci-de-montmagny-qc-g5v-1j9-canada?showNotification=0&showSearchButton=0&showFooter=0&showFlashMessage=0&view=mobile"
-            scrolling="no"
             className="w-full h-full block border-none"
-            title="Horaires des prieres mobile CCI Montmagny"
+            style={{ overflow: "hidden" }}
+            title="Horaires des prières mobile CCI Montmagny"
           />
         </div>
       </GlassCard>
@@ -62,7 +62,7 @@ export default function PrayerTimes() {
           <div className="space-y-3">
             <p
               className="text-xl md:text-2xl leading-loose text-right"
-              dir="rtl"
+              dir="rtl" lang="ar"
               style={{ 
                 color: "var(--theme-gold-light)", 
                 fontFamily: "var(--font-arabic, serif)",

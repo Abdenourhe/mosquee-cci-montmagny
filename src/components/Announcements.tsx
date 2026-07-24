@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 interface Photo { id: string; url: string; caption?: string | null }
 interface Announcement {
@@ -101,9 +102,11 @@ function PhotoSlider({ photos, title }: { photos: Photo[]; title: string }) {
               className="absolute inset-0 cursor-zoom-in"
               onClick={() => openLightbox(i)}
             >
-              <img
+              <Image
                 src={p.url}
                 alt={p.caption ?? title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -185,16 +188,20 @@ function PhotoSlider({ photos, title }: { photos: Photo[]; title: string }) {
             ✕
           </button>
 
-          <img
-            src={photos[lightboxIndex].url}
-            alt={photos[lightboxIndex].caption ?? title}
-            className="relative z-10 max-w-[90vw] max-h-[90vh] object-contain rounded-2xl
-              shadow-[0_24px_80px_rgba(0,0,0,0.5)] animate-slideUp cursor-zoom-out"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxOpen(false);
-            }}
-          />
+          <div className="relative z-10 w-[90vw] h-[90vh]">
+            <Image
+              src={photos[lightboxIndex].url}
+              alt={photos[lightboxIndex].caption ?? title}
+              fill
+              sizes="90vw"
+              className="object-contain rounded-2xl
+                shadow-[0_24px_80px_rgba(0,0,0,0.5)] animate-slideUp cursor-zoom-out"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxOpen(false);
+              }}
+            />
+          </div>
 
           {photos[lightboxIndex].caption && (
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import { IconSun, IconMoon, IconStar, IconSheep, IconPrayer } from "./IconCMYK";
+import { getSiteMode } from "@/lib/site-mode-client";
 
 interface Inv { 
   id: string; 
@@ -123,7 +124,7 @@ function InvocationCard({
         <div className="absolute inset-0 opacity-[0.03]" 
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 0L20 10L10 20L0 10Z' fill='none' stroke='%2300A8A8' stroke-width='0.5'/%3E%3C/svg%3E")` }} />
         
-        <p dir="rtl" className="text-right relative z-10"
+        <p dir="rtl" lang="ar" className="text-right relative z-10"
           style={{
             fontSize: isFocused ? "1.3rem" : "1.15rem",
             fontFamily: "var(--font-arabic)",
@@ -179,7 +180,7 @@ export default function SideInvocations() {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    fetch("/api/site-mode").then(r=>r.json())
+    getSiteMode()
       .then(d=>{ if(d.invocationsActive===false) setEnabled(false); }).catch(()=>{});
     fetch("/api/invocations").then(r=>r.json())
       .then((data) => {
@@ -220,14 +221,31 @@ export default function SideInvocations() {
 
   useEffect(() => {
     if (!enabled || right.length <= 1) return;
-    const t = setTimeout(() => {
-      const id = setInterval(rotateRight, 15000);
-      return () => clearInterval(id);
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    const timeoutId = setTimeout(() => {
+      intervalId = setInterval(rotateRight, 15000);
     }, 7500);
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(timeoutId);
+      if (intervalId !== undefined) clearInterval(intervalId);
+    };
   }, [enabled, right.length, rotateRight]);
 
+  // Si le côté focalisé devient vide (données rechargées) ou est vide au
+  // départ, basculer sur le premier côté non vide (sinon fermer).
+  useEffect(() => {
+    if (focusedSide === "left" && left.length === 0) {
+      setFocusedSide(right.length > 0 ? "right" : null);
+    } else if (focusedSide === "right" && right.length === 0) {
+      setFocusedSide(left.length > 0 ? "left" : null);
+    }
+  }, [focusedSide, left.length, right.length]);
+
   if (!enabled || (left.length === 0 && right.length === 0)) return null;
+
+  // Invocation courante du côté focalisé (version mobile) — peut être
+  // undefined si le côté est vide ; dans ce cas on ne rend rien.
+  const focusedInv = focusedSide === "left" ? left[leftIdx] : focusedSide === "right" ? right[rightIdx] : undefined;
 
   return (
     <>
@@ -293,7 +311,7 @@ export default function SideInvocations() {
                         boxShadow: `0 0 8px ${miniConfig.color}30`
                       }}
                     >
-                      <span className="text-xs">{miniConfig.icon}</span>
+                      <span className="text-xs flex items-center justify-center w-full h-full">{miniConfig.icon}</span>
                     </div>
                     <p className="text-white text-[11px] font-bold truncate flex-1">
                       {left[idx].label}
@@ -312,6 +330,7 @@ export default function SideInvocations() {
             {left.map((_, i) => (
               <button 
                 key={i}
+                aria-label={"Invocation " + (i + 1)}
                 onClick={() => { 
                   setLeftIdx(i); 
                   setLeftVis(true); 
@@ -393,7 +412,7 @@ export default function SideInvocations() {
                         border: `1px solid ${miniConfig.color}60`
                       }}
                     >
-                      <span className="text-xs">{miniConfig.icon}</span>
+                      <span className="text-xs flex items-center justify-center w-full h-full">{miniConfig.icon}</span>
                     </div>
                   </div>
                 );
@@ -405,6 +424,7 @@ export default function SideInvocations() {
             {right.map((_, i) => (
               <button 
                 key={i}
+                aria-label={"Invocation " + (i + 1)}
                 onClick={() => { 
                   setRightIdx(i); 
                   setRightVis(true); 
@@ -434,19 +454,19 @@ export default function SideInvocations() {
               background: "linear-gradient(135deg, #00A8A8, #40C0C0)",
               boxShadow: "0 4px 16px rgba(0,168,168,0.4)",
             }}
-            onClick={() => setFocusedSide(focusedSide ? null : "left")}
+            onClick={() => setFocusedSide(focusedSide ? null : left.length > 0 ? "left" : "right")}
           >
             {focusedSide ? "✕" : "🤲"}
           </button>
 
-          {focusedSide && (
+          {focusedSide && focusedInv && (
             <div 
               className="pointer-events-auto fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
               onClick={() => setFocusedSide(null)}
             >
               <div onClick={(e) => e.stopPropagation()}>
                 <InvocationCard 
-                  inv={focusedSide === "left" ? left[leftIdx] : right[rightIdx]} 
+                  inv={focusedInv} 
                   visible={true} 
                   isNew={false}
                   isFocused={true}

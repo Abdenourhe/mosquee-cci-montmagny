@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { getSiteMode } from "@/lib/site-mode-client";
 
 const MODE_CLASSES: Record<string, string> = {
   normal:   "",
@@ -13,8 +14,7 @@ export default function ThemeApplier() {
   useEffect(() => {
     const applyTheme = async () => {
       try {
-        const res = await fetch("/api/site-mode");
-        const data = await res.json();
+        const data = await getSiteMode();
         const mode = data.mode ?? "normal";
 
         const html = document.documentElement;

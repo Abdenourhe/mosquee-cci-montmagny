@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireAdmin, unauthorized } from "@/lib/auth";
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const { id } = await params;
     const body = await req.json();
@@ -33,6 +35,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 }
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const { id } = await params;
     const body = await req.json();
@@ -42,7 +45,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       return NextResponse.json({ error: "Invocation non trouvée" }, { status: 404 });
     }
 
-    const updates: Record<string, any> = {};
+    const updates: { active?: boolean; order?: number } = {};
     if ("active" in body) updates.active = body.active;
     if ("order" in body) updates.order = typeof body.order === "number" ? body.order : 0;
 
@@ -59,6 +62,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 }
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const { id } = await params;
 

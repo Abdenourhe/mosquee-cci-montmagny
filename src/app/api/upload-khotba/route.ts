@@ -1,28 +1,24 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
+import { requireAdmin, unauthorized } from "@/lib/auth";
+import { validateUploadedFiles } from "@/lib/upload-validation";
 
 export async function POST(req: Request) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const formData = await req.formData();
     const files = formData.getAll("files") as File[];
 
-    if (!files || files.length === 0) {
-      return NextResponse.json({ error: "Aucun fichier reçu" }, { status: 400 });
+    // Images + PDF autorisés ici (les khotbas archivées peuvent être des PDF,
+    // cf. KhotbaManager.tsx). SVG toujours exclu.
+    const validationError = await validateUploadedFiles(files, { allowPdf: true });
+    if (validationError) {
+      return NextResponse.json({ error: validationError }, { status: 400 });
     }
 
     const urls: string[] = [];
 
     for (const file of files) {
-      // Vérifier le type
-      if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
-        continue;
-      }
-
-      // Limite 10 Mo
-      if (file.size > 10 * 1024 * 1024) {
-        return NextResponse.json({ error: `Fichier trop grand: ${file.name} (max 10 Mo)` }, { status: 400 });
-      }
-
       // Upload vers Vercel Blob
       const blob = await put(file.name, file, {
         access: "public",
@@ -30,10 +26,6 @@ export async function POST(req: Request) {
       });
 
       urls.push(blob.url);
-    }
-
-    if (urls.length === 0) {
-      return NextResponse.json({ error: "Aucune image ou PDF valide" }, { status: 400 });
     }
 
     return NextResponse.json({ urls }, { status: 201 });

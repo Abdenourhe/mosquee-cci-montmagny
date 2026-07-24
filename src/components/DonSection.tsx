@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Year { label: string; goal: number; collected: number; }
 interface DonData {
@@ -157,7 +158,7 @@ export default function DonSection() {
                     </div>
                     {data.qrUrl && (
                       <div className="flex-shrink-0 bg-white rounded-xl p-1.5 w-14 h-14 sm:w-16 sm:h-16 mt-2 sm:mt-0">
-                        <img src={data.qrUrl} alt="QR Code Interac" className="w-full h-full object-contain" />
+                        <Image src={data.qrUrl} alt="QR Code Interac" width={64} height={64} className="w-full h-full object-contain" />
                       </div>
                     )}
                   </div>
@@ -165,7 +166,7 @@ export default function DonSection() {
 
                 {/* Ayah */}
                 <div className="text-center pt-1">
-                  <p className="text-sm sm:text-base leading-loose" dir="rtl"
+                  <p className="text-sm sm:text-base leading-loose" dir="rtl" lang="ar"
                     style={{ color: "rgba(197,160,89,0.45)", fontFamily: "var(--font-arabic), serif" }}>
                     مَن ذَا الَّذِي يُقْرِضُ اللَّهَ قَرْضًا حَسَنًا فَيُضَاعِفَهُ لَهُ أَضْعَافًا كَثِيرَةً
                   </p>
@@ -227,7 +228,7 @@ export default function DonSection() {
                         <button key={i} onClick={() => setLightbox(url)}
                           className="rounded-xl overflow-hidden hover:scale-[1.03] transition-transform cursor-zoom-in relative"
                           style={{ aspectRatio: "4/3", border: "1px solid rgba(197,160,89,0.18)" }}>
-                          <img src={url} alt={`Photo projet ${i + 1}`} className="w-full h-full object-cover" />
+                          <Image src={url} alt={`Photo projet ${i + 1}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                           {i === 5 && data.photos.length > 6 && (
                             <div className="absolute inset-0 flex items-center justify-center text-white font-black text-xl"
                               style={{ background: "rgba(0,0,0,0.55)" }}>
@@ -250,7 +251,9 @@ export default function DonSection() {
       {lightbox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/88 p-4"
           onClick={() => setLightbox(null)}>
-          <img src={lightbox} alt="Photo en grand" className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain" />
+          <div className="relative w-full h-full">
+            <Image src={lightbox} alt="Photo en grand" fill sizes="100vw" className="rounded-2xl shadow-2xl object-contain" />
+          </div>
           <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors flex items-center justify-center text-xl">✕</button>
         </div>
       )}

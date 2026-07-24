@@ -91,7 +91,7 @@ export default function MosqueProfile() {
           </p>
         </div>
         <div className="relative z-10 text-center flex-shrink-0">
-          <p className="text-2xl sm:text-3xl leading-loose" dir="rtl"
+          <p className="text-2xl sm:text-3xl leading-loose" dir="rtl" lang="ar"
             style={{ color: "rgba(197,160,89,0.8)", fontFamily: "var(--font-arabic, serif)" }}>
             اللهُ أَكْبَر
           </p>

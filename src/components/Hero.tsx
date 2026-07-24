@@ -126,15 +126,15 @@ export default function Hero() {
           <GlassCard>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl
-                bg-[rgba(0,168,168,0.2)] border border-[rgba(212,168,67,0.3)]">
+                bg-gradient-to-br from-[#D4E2DF] to-[#C8D8D5] border border-[#00A8A8]/40 shadow-sm">
                 <IconBeads className="w-5 h-5" />
               </div>
               <div>
                 <div className="text-white font-black text-sm">Hadith</div>
-                <div className="text-[#E8C878]/60 text-xs">Du quotidien</div>
+                <div className="text-[#D4A843]/60 text-xs">Du quotidien</div>
               </div>
             </div>
-            <p className="text-right leading-loose mb-3 text-[1.05rem]" dir="rtl"
+            <p className="text-right leading-loose mb-3 text-[1.05rem]" dir="rtl" lang="ar"
               style={{ color: "#E8C878", fontFamily: "var(--font-arabic, serif)" }}>
               وَالَّذِي نَفْسِي بِيَدِهِ، لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ
             </p>
@@ -148,15 +148,15 @@ export default function Hero() {
           <GlassCard>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl
-                bg-[rgba(0,168,168,0.2)] border border-[rgba(212,168,67,0.3)]">
+                bg-gradient-to-br from-[#D4E2DF] to-[#C8D8D5] border border-[#00A8A8]/40 shadow-sm">
                 <IconBook className="w-5 h-5" />
               </div>
               <div>
                 <div className="text-white font-black text-sm">Sourate Al-Baqara</div>
-                <div className="text-[#E8C878]/60 text-xs">Coran 2:238</div>
+                <div className="text-[#00A8A8]/60 text-xs">Coran 2:238</div>
               </div>
             </div>
-            <p className="text-right leading-loose mb-3 text-[1.05rem]" dir="rtl"
+            <p className="text-right leading-loose mb-3 text-[1.05rem]" dir="rtl" lang="ar"
               style={{ color: "#E8C878", fontFamily: "var(--font-arabic, serif)" }}>
               حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ
             </p>

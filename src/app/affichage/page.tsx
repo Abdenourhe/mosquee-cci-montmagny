@@ -220,7 +220,7 @@ export default function AffichagePage(){
               </p>
             </div>
             <p style={{textAlign:"center",fontSize:mob?16:20,color:"#E8CB7A",fontFamily:"serif",lineHeight:2}}
-              dir="rtl">جزاك الله خيراً على صدقتك</p>
+              dir="rtl" lang="ar">جزاك الله خيراً على صدقتك</p>
             <p style={{textAlign:"center",fontSize:11,fontStyle:"italic",
               color:"rgba(255,255,255,0.3)",marginTop:2}}>
               Qu&apos;Allah vous accorde la bénédiction
@@ -257,8 +257,7 @@ export default function AffichagePage(){
           {d.qrUrl&&(
             <div style={{padding: mob?"12px 16px":"16px 28px",
               display:"flex",alignItems:"center",gap:14}}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={d.qrUrl} alt="QR"
+              <Image src={d.qrUrl} alt="QR" width={68} height={68}
                 style={{width:mob?56:68,height:mob?56:68,background:"white",
                   borderRadius:10,padding:3,flexShrink:0}}/>
               <div>
@@ -380,10 +379,9 @@ export default function AffichagePage(){
                 scrollbarWidth:"none"}}>
                 {d.photos.map((url,i)=>(
                   <div key={i} style={{flexShrink:0,width:mob?110:150,height:mob?75:100,
-                    borderRadius:12,overflow:"hidden",
+                    borderRadius:12,overflow:"hidden",position:"relative",
                     border:"1px solid rgba(200,169,78,0.2)"}}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={url} alt="" style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                    <Image src={url} alt={`Photo du projet ${i + 1}`} fill sizes={mob?"110px":"150px"} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
                   </div>
                 ))}
               </div>
@@ -394,7 +392,7 @@ export default function AffichagePage(){
           <div style={{marginTop:16,background:"rgba(200,169,78,0.05)",
             border:"1px solid rgba(200,169,78,0.15)",borderRadius:14,
             padding: mob?"14px 16px":"18px 24px",textAlign:"center",flexShrink:0}}>
-            <p style={{fontSize:mob?17:22,lineHeight:2.2,fontFamily:"serif",color:"#E8CB7A"}} dir="rtl">
+            <p style={{fontSize:mob?17:22,lineHeight:2.2,fontFamily:"serif",color:"#E8CB7A"}} dir="rtl" lang="ar">
               لَن تَنَالُوا الْبِرَّ حَتَّىٰ تُنفِقُوا مِمَّا تُحِبُّونَ
             </p>
             <p style={{fontSize:mob?11:13,fontStyle:"italic",color:"rgba(255,255,255,0.3)",marginTop:6}}>

@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireAdmin, unauthorized } from "@/lib/auth";
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const { id } = await params;
     await prisma.activityPhoto.delete({ where: { id } });
@@ -12,6 +14,7 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
 }
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const { id } = await params;
     const body = await req.json();

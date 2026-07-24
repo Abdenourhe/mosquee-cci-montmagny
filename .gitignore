@@ -21,6 +21,11 @@
 # Database
 *.db
 *.db-journal
+prisma/dev.db
+
+# TypeScript build info
+tsconfig.tsbuildinfo
+*.tsbuildinfo
 
 # OS files
 .DS_Store

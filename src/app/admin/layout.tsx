@@ -4,6 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Admin — CCI de Montmagny",
   description: "Tableau de bord d'administration",
+  robots: { index: false, follow: false },
 };
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

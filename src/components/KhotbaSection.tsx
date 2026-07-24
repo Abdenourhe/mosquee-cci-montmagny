@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ContentRow { id: string; title: string | null; body: string; imageUrl: string | null; order: number; }
@@ -105,7 +106,7 @@ export default function KhotbaSection() {
 
           {/* Right: Arabic title */}
           <span
-            dir="rtl"
+            dir="rtl" lang="ar"
             className="text-xl sm:text-2xl font-bold"
             style={{
               fontFamily: "'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif",
@@ -313,10 +314,11 @@ export default function KhotbaSection() {
                                             border: "1px solid rgba(197,160,89,0.2)",
                                           }}
                                         >
-                                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                                          <img
+                                          <Image
                                             src={m.url}
-                                            alt=""
+                                            alt={item.body || "Photo de la khotba"}
+                                            fill
+                                            sizes="96px"
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                           />
                                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">

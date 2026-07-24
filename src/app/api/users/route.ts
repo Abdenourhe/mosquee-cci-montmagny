@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireAdmin, unauthorized } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 
 export async function GET() {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const users = await prisma.user.findMany({
       select: { id: true, email: true, name: true, role: true },
@@ -15,6 +17,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const { email, name, password } = await req.json();
     if (!email || !name || !password) {

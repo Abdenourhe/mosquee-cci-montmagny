@@ -81,7 +81,7 @@ export default function Footer({
           © {new Date().getFullYear()} CCI de Montmagny — Tous droits réservés
         </p>
         <div className="flex items-center gap-4">
-          <span className="text-white/20 text-xs" dir="rtl" style={{ fontFamily: "serif" }}>الحمد لله</span>
+          <span className="text-white/20 text-xs" dir="rtl" lang="ar" style={{ fontFamily: "serif" }}>الحمد لله</span>
           <Link href="/admin" className="text-white/20 text-xs hover:text-white/40 transition-colors">⚙ Admin</Link>
         </div>
       </div>

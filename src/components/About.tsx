@@ -72,7 +72,7 @@ export default function About({ paragraphs = [], cards = [] }: AboutProps) {
                   Sourate Al-Baqara · 3:103
                 </span>
               </div>
-              <p className="text-right text-xl leading-loose mb-4" dir="rtl"
+              <p className="text-right text-xl leading-loose mb-4" dir="rtl" lang="ar"
                 style={{ color: "#E8C878", fontFamily: "var(--font-arabic, serif)" }}>
                 وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا
               </p>

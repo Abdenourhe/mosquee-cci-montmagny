@@ -72,7 +72,7 @@ function Modal({ inv, catKey, onClose, onSaved }: {
           </div>
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Texte arabe *</label>
-            <textarea rows={4} value={arabic} onChange={(e) => setArabic(e.target.value)} dir="rtl" className={INPUT + " resize-none text-right text-lg leading-loose"} />
+            <textarea rows={4} value={arabic} onChange={(e) => setArabic(e.target.value)} dir="rtl" lang="ar" className={INPUT + " resize-none text-right text-lg leading-loose"} />
           </div>
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Traduction française *</label>
@@ -170,9 +170,9 @@ export default function InvocationManager({ session }: Props) {
     
     const label = CATEGORIES.find((c) => c.key === catKey)?.label ?? catKey;
     notify(true, (makeActive ? label + " activé." : label + " désactivé."));
-  } catch (err: any) {
+  } catch (err) {
     console.error("toggleGroup error:", err);
-    notify(false, "Erreur: " + (err.message || "inconnue"));
+    notify(false, "Erreur: " + (err instanceof Error ? err.message : "inconnue"));
     // Recharger pour synchroniser
     fetchAll();
   } finally {
@@ -295,7 +295,7 @@ export default function InvocationManager({ session }: Props) {
                           <div className="flex items-start gap-3">
                             <div className="flex-1 min-w-0">
                               <p className="font-bold text-gray-900 text-sm mb-1 truncate">{inv.label}</p>
-                              <p className="text-right text-gray-600 text-base leading-loose mb-1" dir="rtl">{inv.arabic}</p>
+                              <p className="text-right text-gray-600 text-base leading-loose mb-1" dir="rtl" lang="ar">{inv.arabic}</p>
                               <p className="text-gray-500 text-xs italic line-clamp-2">{inv.french}</p>
                             </div>
                             <div className="flex flex-col gap-1.5 flex-shrink-0 pt-0.5">

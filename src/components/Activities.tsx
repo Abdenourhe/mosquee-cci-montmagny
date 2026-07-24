@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Photo { id: string; url: string; caption?: string | null }
 interface Activity {
@@ -91,13 +92,17 @@ function Lightbox({
         ✕
       </button>
 
-      <img
-        src={photos[current].url}
-        alt={photos[current].caption ?? title}
-        className="relative z-10 max-w-[90vw] max-h-[90vh] object-contain rounded-2xl
-          shadow-[0_24px_80px_rgba(0,0,0,0.5)] animate-slideUp cursor-zoom-out"
-        onClick={(e) => { e.stopPropagation(); onClose(); }}
-      />
+      <div className="relative z-10 w-[90vw] h-[90vh]">
+        <Image
+          src={photos[current].url}
+          alt={photos[current].caption ?? title}
+          fill
+          sizes="90vw"
+          className="object-contain rounded-2xl
+            shadow-[0_24px_80px_rgba(0,0,0,0.5)] animate-slideUp cursor-zoom-out"
+          onClick={(e) => { e.stopPropagation(); onClose(); }}
+        />
+      </div>
 
       {photos[current].caption && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
@@ -176,9 +181,11 @@ function MasonryCard({ a, height, index }: { a: Activity; height: number; index:
             style={{ height }}
             onClick={() => openLightbox(0)}
           >
-            <img 
-              src={a.photos[0].url} 
-              alt={a.photos[0].caption ?? a.title} 
+            <Image
+              src={a.photos[0].url}
+              alt={a.photos[0].caption ?? a.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
@@ -289,7 +296,7 @@ function EventCard({ data, flip=false }: { data:EventData; flip?:boolean }) {
       </div>
       <div className="relative z-10 text-center">
         <div className="text-9xl mb-6 animate-float">{data.emoji}</div>
-        <p className="text-2xl md:text-3xl leading-loose font-arabic" dir="rtl" style={{ color:"var(--theme-gold-light)" }}>{data.arabic}</p>
+        <p className="text-2xl md:text-3xl leading-loose font-arabic" dir="rtl" lang="ar" style={{ color:"var(--theme-gold-light)" }}>{data.arabic}</p>
         <p className="text-white/50 text-base mt-3 italic">{data.arabicLabel}</p>
       </div>
     </div>

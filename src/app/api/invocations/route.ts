@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireAdmin, unauthorized } from "@/lib/auth";
 
 export async function GET(req: Request) {
   try {
@@ -22,6 +23,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (!(await requireAdmin())) return unauthorized();
   try {
     const body = await req.json();
     const { label, arabic, french, side, active, order, category } = body;  // ← CHANGÉ

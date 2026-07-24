@@ -8,6 +8,7 @@ interface FormData {
   phone: string;
   subject: string;
   message: string;
+  website: string; // honeypot anti-spam (invisible pour les humains)
 }
 
 interface ContactProps {
@@ -36,7 +37,7 @@ export default function Contact({
     { icon: "🕌", label: "Jumaa",    value: "Vendredi\nPrière de la communauté" },
   ];
   const [form, setForm] = useState<FormData>({
-    name: "", email: "", phone: "", subject: "", message: "",
+    name: "", email: "", phone: "", subject: "", message: "", website: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
@@ -54,7 +55,7 @@ export default function Contact({
         body: JSON.stringify(form),
       });
       setStatus(res.ok ? "success" : "error");
-      if (res.ok) setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+      if (res.ok) setForm({ name: "", email: "", phone: "", subject: "", message: "", website: "" });
     } catch {
       setStatus("error");
     }
@@ -204,6 +205,21 @@ export default function Contact({
                   focus:outline-none focus:border-[var(--theme-primary)] focus:ring-2 focus:ring-[var(--theme-primary)]/10
                   transition-all placeholder:text-gray-400 resize-none"
               />
+            </div>
+
+            {/* Honeypot anti-spam — invisible pour les humains, ne pas remplir */}
+            <div className="hidden" aria-hidden="true">
+              <label>
+                Ne pas remplir ce champ
+                <input
+                  type="text"
+                  name="website"
+                  value={form.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </label>
             </div>
 
             {/* Submit */}

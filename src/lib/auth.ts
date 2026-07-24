@@ -1,4 +1,5 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, Session, getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "./db";
 import bcrypt from "bcryptjs";
@@ -51,3 +52,19 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
+
+/**
+ * Vérifie que la requête provient d'un administrateur authentifié.
+ * Retourne la session si c'est le cas, sinon `null`.
+ */
+export async function requireAdmin(): Promise<Session | null> {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) return null;
+  if (session.user.role && session.user.role !== "ADMIN") return null;
+  return session;
+}
+
+/** Réponse 401 standard pour les handlers d'API protégés. */
+export function unauthorized() {
+  return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+}
